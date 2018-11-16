@@ -488,11 +488,11 @@ mock.onGet('/api/channels').reply(200,{
 
 mock.onGet('/api/status').reply(200,{
 
-    "contractCount": "129",
+    "contractCount": "49",
     "txCount": "4247",
-    "latestBlock": "1997",
-    "nodeCount": "1",
-    "channelCount": "1"
+    "latestBlock": "99",
+    "nodeCount": "10",
+    "channelCount": "100"
   
 })
 
@@ -700,7 +700,8 @@ const channelList = () => (dispatch) => {
     })
 }
 
-const dashStats = () => dispatch => {
+const dashStats = (channel) => dispatch => {
+    console.log(123,channel)
   return axios.get('/api/status')
     .then(resp => {
       dispatch(actions.getDashStats(resp.data))

@@ -10,8 +10,10 @@ import Icons from './pages/Icons';
 import Notifications from './pages/Notifications';
 import Upgrade from './pages/Upgrade';
 import Nodes from './pages/Nodes';
+import Blocks from './pages/Blocks';
+import Chains from './pages/Chains';
+import Contracts from './pages/Contracts';
 import Transactions from './pages/Transactions';
-
 
 const routerConfig = [
   {
@@ -48,6 +50,21 @@ const routerConfig = [
     path: '/nodes',
     name: 'Nodes',
     component: Nodes,
+  },
+  {
+    path: '/blocks',
+    name: 'Blocks',
+    component: Blocks,
+  },
+  {
+    path: '/chains',
+    name: 'Chains',
+    component: Chains,
+  },
+  {
+    path: '/contracts',
+    name: 'Contracts',
+    component: Contracts,
   },
   {
     path: '/transactions',

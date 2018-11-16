@@ -3,14 +3,14 @@ import { Grid, Row, Col } from 'react-bootstrap';
 
 import Card from 'components/Card';
 
-import {BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
-import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css'
+import {BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 
 import {Table} from '@icedesign/base';
-import config from './config.json'
+import config from './config.json';
 import { FormattedMessage } from 'react-intl';
-import 'bootstrap/dist/css/bootstrap.css'
-import './main.css'
+import 'bootstrap/dist/css/bootstrap.css';
+import './main.css';
 
 import Pagination from "react-js-pagination";
 import"bootstrap/less/bootstrap.less";
@@ -18,13 +18,25 @@ import {tableOperations, tableSelectors} from "./state/redux/tables/";
 
 import compose from "recompose/compose";
 import {connect} from "react-redux";
-import Dialog from 'react-bootstrap-dialog'
-import Transaction from './Transaction'
+import Dialog from 'react-bootstrap-dialog';
+import TransactionDetail from './TransactionDetail';
 
+const {
+  transactionList, 
+  transaction,
+  channels,
+  dashStats
 
-const {blockList, transaction, channel, dashStats } = tableOperations;
-const {channelsSelector, blockListSelector, transactionSelector, currentChannelSelector, dashStatsSelector } = tableSelectors
+} = tableOperations;
 
+const {
+  channelsSelector, 
+  transactionListSelector, 
+  transactionSelector,
+  currentChannelSelector, 
+  dashStatsSelector
+
+} = tableSelectors
 
 
 class TableList extends Component {
@@ -32,13 +44,10 @@ class TableList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      blockList : [],
+      transactionList : [],
       channels : [],
       currentPage : 1,
-      dialogOpen: false,
-      dialogOpenBlockHash: false,
-      transactions : [],
-      latestBlock : 0
+      txCount : 0
     };
   }
 
@@ -47,41 +56,20 @@ class TableList extends Component {
 
     this.fetchData(this.state.currentPage);
 
-    let arr = [];
-    let selectedValue ={}
     await this.props.getChannels()
     const currentChannel = this.props.currentChannel
-    await this.props.getblockList(currentChannel, 10, 0)
-    await this.props.getTransaction(currentChannel) 
+    await this.props.getTransactionList(currentChannel,10,0)
     await this.props.getdashStats(currentChannel)
-
-
-    if (this.props.channels) {
-      this.props.channels.forEach(element => {
-      if (element.genesis_block_hash === this.props.currentChannel) {
-        selectedValue = {
-          value: element.genesis_block_hash,
-          label: element.channelname
-        };
-
-      }
-      arr.push({
-        value: element.genesis_block_hash,
-        label: element.channelname
-      });
-    });
-    }
+   
     this.setState({
-      channels: arr,
-      selectedChannel: selectedValue,
-      latestBlock : this.props.dashStats.latestBlock
+      txCount : this.props.dashStats.txCount
     });
    setInterval(() => this.syncData(this.props.currentChannel), 5000);
   }
 
   async syncData(currentChannel) {
     await Promise.all([
-      this.props.getblockList(currentChannel,10,0),
+      this.props.getTransactionList(currentChannel,10,0),
       this.props.getChannels(),
       this.props.getdashStats(currentChannel)
     ])
@@ -91,14 +79,14 @@ class TableList extends Component {
 
   componentWillReceiveProps(nextProps) {
     
-    if (nextProps.blockList != undefined) {
-      this.setState({blockList : nextProps.blockList, isLoading : false, latestBlock : nextProps.dashStats.latestBlock})
+    if (nextProps.transactionList != undefined) {
+      this.setState({transactionList : nextProps.transactionList.rows, isLoading : false, txCount : nextProps.dashStats.txCount})
     }
     
   }
 
   fetchData = async(currentPage) => {
-    await this.props.getblockList(this.props.currentChannel,10, currentPage-1)
+    await this.props.getTransactionList(this.props.currentChannel,10, currentPage-1)
   };
 
 
@@ -107,48 +95,41 @@ class TableList extends Component {
     this.fetchData(currentPage);
   };
 
-  handleDialogOpenTransactions = (row) => {
-    const data = [];
-    row.forEach(element => {
-      data.push({
-        txhash: element
-      })
-    })
+  handleDialogOpenTransactions = async(row) => {
+    await this.props.getTransaction(this.props.currentChannel, row);
 
     this.dialog.show({
-      body: <Transaction
-            transaction={data}
-            transactions = {this.props.transaction}
-            getTransaction = {this.props.getTransaction}
+      title : <FormattedMessage
+                id="page.localeProvider.txdetails"
+                defaultMessage="Transaction Details"
+                description="Transaction Details"
+              />,
+      body: <TransactionDetail
+            transaction={this.props.transaction}
           />,
-      /*actions: [
-        Dialog.CancelAction(),
-        Dialog.OKAction()
-      ],*/
+      bsSize: 'large',
       onHide: (dialog) => {
         dialog.hide()
       }
     })
   }
  
-  handleClose = () => this.setState({ dialogOpen: false })
-
   render() {
     const columnHeaders = []
-    for (let i = 0; i < config.blocks.length; i++) {
-      switch (config.blocks[i]) {
-        case 'blocknumber' : columnHeaders.push(
-          <Table.Column key = {config.blocks[i]} title={
+    for (let i = 0; i < config.transactions.length; i++) {
+      switch (config.transactions[i]) {
+        case 'creator' : columnHeaders.push(
+          <Table.Column key = {config.transactions[i]} title={
             <FormattedMessage
-              id='page.localeProvider.blocknum'
-              defaultMessage='blocknum'
-              description='blocknum'
+              id='page.localeProvider.creator'
+              defaultMessage='Creator'
+              description='Creator'
             />
             }
-            dataIndex="blocknum" width={100} />
+            dataIndex="creator_msp_id" width={100} />
         ); break
         case 'chainname' : columnHeaders.push(
-          <Table.Column key = {config.blocks[i]} title={
+          <Table.Column key = {config.transactions[i]} title={
             <FormattedMessage
               id='page.localeProvider.chainname'
               defaultMessage='Chain Name'
@@ -157,93 +138,147 @@ class TableList extends Component {
             }
             dataIndex="channelname" width={110} />
         );break
-        case 'number_of_tx' : columnHeaders.push(
-          <Table.Column key = {config.blocks[i]} title={
+        case 'txid' : columnHeaders.push(
+          <Table.Column key = {config.transactions[i]} title={
               <FormattedMessage
-              id='page.localeProvider.num'
-              defaultMessage='Number of Tx'
-              description='Number of Tx'
+              id='page.localeProvider.txid'
+              defaultMessage='Tx Id'
+              description='Tx Id'
             />}
-              dataIndex="txcount"
+              dataIndex="txhash"
+              cell= { row =>(
+                  <span>
+                <a
+                  className="partialHash"
+                  onClick={() => this.handleDialogOpenTransactions(row)}
+                  href="#/transactions"
+                >
+                  {row.slice(0, 16)}
+                  {!row ? "" : "... "}
+                </a>
+              </span>
+                )}
               width={100} />
         );break
-        case 'datahash' : columnHeaders.push(
-            <Table.Column key = {config.blocks[i]} title={<FormattedMessage
-              id='page.localeProvider.datah'
-              defaultMessage='datahash'
-              description='datahash'
+        case 'type' : columnHeaders.push(
+            <Table.Column key = {config.transactions[i]} title={<FormattedMessage
+              id='page.localeProvider.type'
+              defaultMessage='Type'
+              description='Type'
             />}
-              dataIndex="datahash"
+              dataIndex="type"
               width={60} />
         );break
 
-        case 'blockhash' : columnHeaders.push(
-          <Table.Column key = {config.blocks[i]} title={<FormattedMessage
-            id='page.localeProvider.blockhash'
-            defaultMessage='blockhash'
-            description='blockhash'
+        case 'contract' : columnHeaders.push(
+          <Table.Column key = {config.transactions[i]} title={<FormattedMessage
+            id='page.localeProvider.contract'
+            defaultMessage='Contract'
+            description='Contract'
           />}
-            dataIndex="blockhash"
+            dataIndex="contractname"
             cell= { row =>(
-              <span>
-                <a
-                  className="partialHash"
-                  onClick={() => this.handleDialogOpenBlockHash(row)}
-                  href="#/blocks"
-                >
-                  <div className="fullHash" id="showTransactionId">
-                    {row}
-                  </div>{" "}
-                  {row.slice(0, 8)}
+                  <span>
+                  {row.slice(0, 16)}
                   {!row ? "" : "... "}
-                </a>
               </span>
                 )}
             width={100} />
         );break
           
-        case 'prehash' : columnHeaders.push(
-          <Table.Column key = {config.blocks[i]} title={<FormattedMessage
-            id='page.localeProvider.prehash'
-            defaultMessage='prehash'
-            description='prehash'
+        case 'timestamp' : columnHeaders.push(
+          <Table.Column key = {config.transactions[i]} title={<FormattedMessage
+            id='page.localeProvider.timestamp'
+            defaultMessage='Timestamp'
+            description='Timestamp'
           />}
-            dataIndex="prehash"
+            dataIndex="createdt"
             width={200} />
         );break
 
-        case 'transactions' : columnHeaders.push(
-          <Table.Column key = {config.blocks[i]} title={<FormattedMessage
-            id='page.localeProvider.transactions'
-            defaultMessage='transactions'
-            description='transactions'
+        case 'txhash' : columnHeaders.push(
+          <Table.Column key = {config.transactions[i]} title={<FormattedMessage
+            id='page.localeProvider.txhash'
+            defaultMessage='Txhash'
+            description='Txhash'
           />}
             dataIndex="txhash"
             cell= { row =>(
-              <span>
-                <button
-                  className="partialHash"
-                  onClick={() => this.handleDialogOpenTransactions(row)}
-                  disabled= {row ? "" : "disabled"}
-                  href="#/blocks"
-                >
-                  <div className="fullHash" id="showTransactionId">
-                    <FormattedMessage
-                    id="page.localeProvider.details"
-                    defaultMessage="Details"
-                    description="Details"
-                    />
-                  </div>{" "}
-                    <FormattedMessage
-                    id="page.localeProvider.details"
-                    defaultMessage="Details"
-                    description="Details"
-                    />
-                </button>{" "}
+                  <span>
+                  {row.slice(0, 16)}
+                  {!row ? "" : "... "}
               </span>
-            )}
+                )}
             width={100} />
         );break
+
+        case 'from' : columnHeaders.push(
+          <Table.Column key = {config.transactions[i]} title={<FormattedMessage
+            id='page.localeProvider.from'
+            defaultMessage='from'
+            description='from'
+          />}
+            dataIndex="from"
+            cell= { row =>(
+              <span>
+                {row.slice(0, 16)}
+                {!row ? "" : "... "}
+              </span>
+                )}
+            width={100} />
+        );break
+
+        case 'block' : columnHeaders.push(
+          <Table.Column key = {config.transactions[i]} title={<FormattedMessage
+            id='page.localeProvider.blockid'
+            defaultMessage='blockid'
+            description='blockid'
+          />}
+            dataIndex="blockid"
+            width={70} />
+        );break 
+
+        case 'blocktime' : columnHeaders.push(
+          <Table.Column key = {config.transactions[i]} title={<FormattedMessage
+            id='page.localeProvider.blocktime'
+            defaultMessage='blocktime'
+            description='blocktime'
+          />}
+            dataIndex="blocktime"
+            width={100} />
+        );break
+
+        case 'to' : columnHeaders.push(
+          <Table.Column key = {config.transactions[i]} title={<FormattedMessage
+            id='page.localeProvider.to'
+            defaultMessage='to'
+            description='to'
+          />}
+            dataIndex="to"
+            cell= { row =>(
+              <span>
+                {row.slice(0, 16)}
+                {!row ? "" : "... "}
+               
+              </span>
+                )}
+            width={100} />
+        );break
+
+        case 'status' : columnHeaders.push(
+          <Table.Column key = {config.transactions[i]} title={<FormattedMessage
+            id='page.localeProvider.status'
+            defaultMessage='status'
+            description='status'
+          />}
+            dataIndex="status"
+            width={100} />
+        );break
+
+
+
+
+
 
         default : break
       }
@@ -254,14 +289,12 @@ class TableList extends Component {
           <Row>
             <Col md={12}>
               <Card
-                title="Striped Table with Hover"
-                category="Here is a subtitle for this table"
                 ctTableFullWidth
                 ctTableResponsive
                 content={
                   <div >
                     <Table
-                      dataSource={this.state.blockList}
+                      dataSource={this.state.transactionList}
                       isLoading={this.state.isLoading}
                       className="basic-table"
                       hasBorder={false}
@@ -271,7 +304,7 @@ class TableList extends Component {
                     <Pagination
                       activePage={this.state.currentPage}
                       itemsCountPerPage={10}
-                      totalItemsCount={this.state.latestBlock}
+                      totalItemsCount={this.state.txCount}
                       pageRangeDisplayed={4}
                       onChange={this.changePage}
                     />
@@ -293,13 +326,13 @@ export default compose(
     state => ({
       currentChannel: currentChannelSelector(state),
       channels : channelsSelector(state),
-      blockList : blockListSelector(state),
+      transactionList : transactionListSelector(state),
       dashStats : dashStatsSelector(state),
       transaction: transactionSelector(state)
     }),
     {
-      getblockList: blockList,
-      getChannels : channel,
+      getTransactionList: transactionList,
+      getChannels : channels,
       getdashStats : dashStats,
       getTransaction : transaction
     }

@@ -488,7 +488,7 @@ mock.onGet('/api/channels').reply(200,{
 
 mock.onGet('/api/status').reply(200,{
 
-    "contractCount": "9",
+    "contractCount": "79",
     "txCount": "4247",
     "latestBlock": "997",
     "nodeCount": "1",
