@@ -1,17 +1,7 @@
 import React, { Component } from 'react';
-import { Provider } from 'react-redux'
-import createStore from './state/store'
-import { unregister } from './registerServiceWorker'
-import LiteTable from './LiteTable';
-import tableOperations from './state/redux/tables/operations'
 import { IntlProvider, addLocaleData } from 'react-intl';
 import cookie from 'react-cookies';
-
-const store = createStore()
-store.dispatch(tableOperations.channel())
-store.dispatch(tableOperations.channelList())
-store.dispatch(tableOperations.channels())
-unregister()
+import LiteTable from './LiteTable';
 
 function getLocale(lang) {
   let result = {};
@@ -46,9 +36,7 @@ class Main extends Component {
           messages={appLocale.messages}
           formats={appLocale.formats}
         >
-	      	<Provider store={store} >
-	          	<LiteTable />
-	    	</Provider>
+      	<LiteTable />
     	</IntlProvider>
     );
   }

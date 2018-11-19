@@ -10,7 +10,7 @@ import compose from "recompose/compose";
 import {connect} from "react-redux";
 import { FormattedMessage } from 'react-intl';
 
-import {tableOperations, tableSelectors} from "./state/redux/tables/";
+import {tableOperations, tableSelectors} from "state/redux/tables/";
 
 const {
   channelsSelector, 

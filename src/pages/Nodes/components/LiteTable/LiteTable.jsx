@@ -4,7 +4,7 @@ import { Table } from '@icedesign/base';
 import compose from "recompose/compose";
 import {connect} from "react-redux";
 
-import {tableOperations, tableSelectors} from "./state/redux/tables/";
+import {tableOperations, tableSelectors} from "state/redux/tables/";
 import config from './config.json'
 import { FormattedMessage } from 'react-intl'
 import 'flag-icon-css/css/flag-icon.min.css';

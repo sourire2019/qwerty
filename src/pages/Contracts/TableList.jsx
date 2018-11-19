@@ -13,7 +13,7 @@ import './main.css';
 
 import Pagination from "react-js-pagination";
 import"bootstrap/less/bootstrap.less";
-import {tableOperations, tableSelectors} from "./state/redux/tables/";
+import {tableOperations, tableSelectors} from "state/redux/tables/";
 
 import compose from "recompose/compose";
 import {connect} from "react-redux";

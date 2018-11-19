@@ -1,17 +1,7 @@
 import TableList from './TableList';
 import React, { Component } from 'react';
-import { Provider } from 'react-redux'
-import createStore from './state/store'
-import { unregister } from './registerServiceWorker'
-import tableOperations from './state/redux/tables/operations'
 import { IntlProvider, addLocaleData } from 'react-intl';
 import cookie from 'react-cookies';
-
-const store = createStore()
-store.dispatch(tableOperations.channel())
-store.dispatch(tableOperations.channelList())
-store.dispatch(tableOperations.channels())
-unregister()
 
 function getLocale(lang) {
   let result = {};
@@ -46,9 +36,7 @@ class Main extends Component {
           messages={appLocale.messages}
           formats={appLocale.formats}
         >
-	      	<Provider store={store} >
-	          	<TableList />
-	    	</Provider>
+      	<TableList />
     	</IntlProvider>
     );
   }
