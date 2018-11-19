@@ -40,7 +40,8 @@
     "reactstrap": "^6.5.0",
     "recompose": "^0.30.0",
     "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "superagent": "^3.8.2"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.3",
@@ -67,11 +68,10 @@
     "start-js": "react-app-rewired start",
     "start": "npm-run-all -p watch-css start-js",
     "build-js": "react-app-rewired build",
-    "build": "npm-run-all build-css build-js",
+    "build": "react-scripts build",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject",
-    "lint": "eslint . --ext '.js,.jsx' --fix",
-    "build": "react-scripts build"
+    "lint": "eslint . --ext '.js,.jsx' --fix"
   },
   "proxy": "http://localhost:8080/",
   "publishConfig": {
