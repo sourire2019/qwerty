@@ -3,7 +3,6 @@ import { Grid, Row, Col } from 'react-bootstrap';
 
 import Card from 'components/Card';
 
-import {BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 
 import {Table} from '@icedesign/base';
@@ -40,29 +39,14 @@ class TableList extends Component {
 
     this.fetchData(this.state.currentPage);
 
-    let arr = [];
-    let selectedValue ={}
     await this.props.getChannels()
-    const currentChannel = this.props.currentChannel
-
+   
     if (this.props.channels) {
-      this.props.channels.forEach(element => {
-      if (element.genesis_block_hash === this.props.currentChannel) {
-        selectedValue = {
-          value: element.genesis_block_hash,
-          label: element.channelname
-        };
-
-      }
-      arr.push({
-        value: element.genesis_block_hash,
-        label: element.channelname
-      });
-    });
+      this.setState({
+        channels : this.props.channels
+      })
     }
-    this.setState({
-      channels : this.props.channels
-    })
+    
    setInterval(() => this.syncData(this.props.currentChannel), 5000);
   }
 

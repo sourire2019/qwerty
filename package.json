@@ -70,8 +70,10 @@
     "build": "npm-run-all build-css build-js",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject",
-    "lint": "eslint . --ext '.js,.jsx' --fix"
+    "lint": "eslint . --ext '.js,.jsx' --fix",
+    "build": "react-scripts build"
   },
+  "proxy": "http://localhost:8080/",
   "publishConfig": {
     "registry": "http://registry.npmjs.com",
     "access": "public"

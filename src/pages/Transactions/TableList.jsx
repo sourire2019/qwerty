@@ -3,7 +3,6 @@ import { Grid, Row, Col } from 'react-bootstrap';
 
 import Card from 'components/Card';
 
-import {BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 
 import {Table} from '@icedesign/base';
@@ -153,7 +152,7 @@ class TableList extends Component {
                   onClick={() => this.handleDialogOpenTransactions(row)}
                   href="#/transactions"
                 >
-                  {row.slice(0, 16)}
+                  {row.slice(0, 8)}
                   {!row ? "" : "... "}
                 </a>
               </span>
@@ -179,7 +178,7 @@ class TableList extends Component {
             dataIndex="contractname"
             cell= { row =>(
                   <span>
-                  {row.slice(0, 16)}
+                  {row.slice(0, 8)}
                   {!row ? "" : "... "}
               </span>
                 )}
@@ -205,7 +204,7 @@ class TableList extends Component {
             dataIndex="txhash"
             cell= { row =>(
                   <span>
-                  {row.slice(0, 16)}
+                  {row.slice(0, 8)}
                   {!row ? "" : "... "}
               </span>
                 )}
@@ -221,7 +220,7 @@ class TableList extends Component {
             dataIndex="from"
             cell= { row =>(
               <span>
-                {row.slice(0, 16)}
+                {row.slice(0, 8)}
                 {!row ? "" : "... "}
               </span>
                 )}
@@ -257,7 +256,7 @@ class TableList extends Component {
             dataIndex="to"
             cell= { row =>(
               <span>
-                {row.slice(0, 16)}
+                {row.slice(0, 8)}
                 {!row ? "" : "... "}
                
               </span>
@@ -274,12 +273,6 @@ class TableList extends Component {
             dataIndex="status"
             width={100} />
         );break
-
-
-
-
-
-
         default : break
       }
     }

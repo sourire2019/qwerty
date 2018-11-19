@@ -164,83 +164,6 @@ mock.onGet('/api/blockAndTxList').reply(200, {
   ]
 });
 
-mock.onGet('/api/contract').reply(200, {
-  "contract": [
-    {
-        "name": "0xf11902ca8bb5df180e0843a349f76be2f6c9f06e",
-        "balance": "0",
-        "txcount": 1,
-        "creator": "0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b",
-        "creator_hash": "0x8a657c1e5e69a437ab7acabee54937f0a031225719a0bfab6ac0371c13189c18",
-        "contract_code": null
-    },
-    {
-        "name": "0x25b88fa14edee9a87a396432919f07d80965c732",
-        "balance": "0",
-        "txcount": 1,
-        "creator": "0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b",
-        "creator_hash": "0x3298359ad17b4bb1ff2856ea75228455774a0a5c8e19d4c4bee07a2f81f5600a",
-        "contract_code": null
-    },
-    {
-        "name": "0x3d53ec23c0e58de07f5042d9b5a3fdeb4b33f7f3",
-        "balance": "0",
-        "txcount": 1,
-        "creator": "0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b",
-        "creator_hash": "0x588972b57b48d5fd1f41be78c617f0e5116c21f8c4c2a7ca8277db6bd4ff04b9",
-        "contract_code": null
-    },
-    {
-        "name": "0x34824636703264c992f6955e90652f67607a930d",
-        "balance": "0",
-        "txcount": 1,
-        "creator": "0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b",
-        "creator_hash": "0xd633747bdacaf8399197c2a0133ae87a821bb534c9c15780b1cc04e31d58e561",
-        "contract_code": null
-    },
-    {
-        "name": "0x05938a839301c9d6f3cb955acfd59cea29a955b3",
-        "balance": "0",
-        "txcount": 1,
-        "creator": "0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b",
-        "creator_hash": "0xd0fa162d1db66f88df4393dd65c9c87958f67ae4619640c387290d515149c799",
-        "contract_code": null
-    },
-    {
-        "name": "0x9098d3ea16e71b9030b814fba0101af51e10c145",
-        "balance": "0",
-        "txcount": 1,
-        "creator": "0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b",
-        "creator_hash": "0xe84a71c016f9015b40d2f17a248d4503e724ac791c01abc110dc66f3bce20a00",
-        "contract_code": null
-    },
-    {
-        "name": "0x0863a10c6873842667d4907f58a2c8518dc1c807",
-        "balance": "0",
-        "txcount": 1,
-        "creator": "0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b",
-        "creator_hash": "0xa96945650ec4e3de4382613afeefdfc8790ad6bd85e91471a4cbfe2256dbd6b5",
-        "contract_code": null
-    },
-    {
-        "name": "0x7f027ee33d1642fdd4aebe09f8049ee65f021d2a",
-        "balance": "0",
-        "txcount": 1,
-        "creator": "0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b",
-        "creator_hash": "0x746078dd03e33350ca20baa83e23f0f2d00f2168f2efff717e1073f9b6364880",
-        "contract_code": null
-    },
-    {
-        "name": "0x2ea7588addaaa29b95eec58102c9abab77fbca9e",
-        "balance": "0",
-        "txcount": 1,
-        "creator": "0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b",
-        "creator_hash": "0xcff76ab48d241860445fa0df8d2bb3de8d43a43db064ab1af4ea781dfb2d095f",
-        "contract_code": null
-    }
-  ]
-});
-
 mock.onGet('/api/channels/info').reply(200, {
     "channels": [
         {
@@ -253,23 +176,6 @@ mock.onGet('/api/channels/info').reply(200, {
             "channel_hash": "justitia-chan1"
         }
     ]
-});
-
-mock.onGet('/api/nodes').reply(200, {
-  "nodes": [
-    {
-        "name": "justitia-chan1",
-        "requests": "127.0.0.1:47768",
-        "server_hostname": "justitia-node1",
-        "genesis_block_hash": "justitia-chan1"
-    },
-    {
-        "name": "justitia-chan2",
-        "requests": "127.0.0.1:47768",
-        "server_hostname": "justitia-node2",
-        "genesis_block_hash": "justitia-chan1"
-    }
-  ]
 });
 
 mock.onGet('/api/transaction').reply(200, {
@@ -288,193 +194,6 @@ mock.onGet('/api/transaction').reply(200, {
   }
 });
 
-mock.onGet('/api/txList').reply(200, {
-  "rows": [
-    {
-        "creator_msp_id": null,
-        "txhash": "0x2f29089d8c1748adc09b2962e75348e5b8056b1cbdd0bd02fdeb5e4170aad931",
-        "type": "0",
-        "contractname": "",
-        "createdt": "2018-10-16T23:08:10.000Z",
-        "blockid": 18986,
-        "blocktime": null,
-        "from": "0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b",
-        "to": "0x87f029b41ea019dfbabf17bb579870c3e87faf8a",
-        "channelname": "justitia-chan1"
-    },
-    {
-        "creator_msp_id": null,
-        "txhash": "0x412747a1435b433c28ce0548943c163734a2c53637b5fba29e84223d31993630",
-        "type": "0",
-        "contractname": "",
-        "createdt": "2018-10-16T23:08:10.000Z",
-        "blockid": 18986,
-        "blocktime": null,
-        "from": "0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b",
-        "to": "0x01c91a1b352a2903bc8378e5f645c9bc8685029e",
-        "channelname": "justitia-chan1"
-    },
-    {
-        "creator_msp_id": null,
-        "txhash": "0xda74d3118805afe0e629e1425b62c41a22236d4a80bbeacb1da04e46c6e53bc8",
-        "type": "0",
-        "contractname": "",
-        "createdt": "2018-10-16T23:08:10.000Z",
-        "blockid": 18986,
-        "blocktime": null,
-        "from": "0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b",
-        "to": "0x1f851d4d373e3e4d93bc1f26718b3ea0e5d3b1f1",
-        "channelname": "justitia-chan1"
-    },
-    {
-        "creator_msp_id": null,
-        "txhash": "0xdd4e2bccaed9522682a965a11f2f366ae38006c86a73f2cbe33143039b9fc41e",
-        "type": "0",
-        "contractname": "",
-        "createdt": "2018-10-16T23:08:10.000Z",
-        "blockid": 18986,
-        "blocktime": null,
-        "from": "0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b",
-        "to": "0x57924a847e363a49c757792aa2f30f46fa922370",
-        "channelname": "justitia-chan1"
-    },
-    {
-        "creator_msp_id": null,
-        "txhash": "0xc3971cf9c8be7c2e30ba91481ea66592d55fdb88214d0a43165a4653095cadb3",
-        "type": "0",
-        "contractname": "",
-        "createdt": "2018-10-16T23:08:10.000Z",
-        "blockid": 18986,
-        "blocktime": null,
-        "from": "0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b",
-        "to": "0x1d1602e497f7a6d13a4e846ea469a1bfa24ecb13",
-        "channelname": "justitia-chan1"
-    },
-    {
-        "creator_msp_id": null,
-        "txhash": "0x472e22f461a4678c6473b200c7df074c2eb6d0c230bac31d5e2a1f9696592fcd",
-        "type": "0",
-        "contractname": "",
-        "createdt": "2018-10-16T23:08:10.000Z",
-        "blockid": 18986,
-        "blocktime": null,
-        "from": "0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b",
-        "to": "0x926794f9785ed0ffe92364ee796f2234998f6f20",
-        "channelname": "justitia-chan1"
-    },
-    {
-        "creator_msp_id": null,
-        "txhash": "0xb5e96154bd58aa978ef7b48a634a96e13e14a99b02754ecb8004fa6c41e414d9",
-        "type": "0",
-        "contractname": "",
-        "createdt": "2018-10-16T23:08:10.000Z",
-        "blockid": 18986,
-        "blocktime": null,
-        "from": "0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b",
-        "to": "0x3be86cf6b79472aa0ad787ec410e08b877e52feb",
-        "channelname": "justitia-chan1"
-    },
-    {
-        "creator_msp_id": null,
-        "txhash": "0x3462a47fd4e62bd619fa8a90ee1c9fddc7f95646e15cf839baa485d7b172094e",
-        "type": "0",
-        "contractname": "",
-        "createdt": "2018-10-16T23:08:10.000Z",
-        "blockid": 18986,
-        "blocktime": null,
-        "from": "0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b",
-        "to": "0x7a445eaf276834d9aaeda583f46d6b505489923e",
-        "channelname": "justitia-chan1"
-    },
-    {
-        "creator_msp_id": null,
-        "txhash": "0xfc64fe1ca4b9a97b0506ef5cb214069cdf0fc3a0eff3ec741980e651c0feb3e7",
-        "type": "0",
-        "contractname": "",
-        "createdt": "2018-10-16T23:08:10.000Z",
-        "blockid": 18986,
-        "blocktime": null,
-        "from": "0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b",
-        "to": "0x8be461ea3c27b698a31515a98b8fa339b4bea51a",
-        "channelname": "justitia-chan1"
-    },
-    {
-        "creator_msp_id": null,
-        "txhash": "0xcfc066dea7d3827be02c340f907ddb0e654e95342be28a6d2a08e169c18bfc05",
-        "type": "0",
-        "contractname": "",
-        "createdt": "2018-10-16T23:08:06.000Z",
-        "blockid": 18984,
-        "blocktime": null,
-        "from": "0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b",
-        "to": "0x926794f9785ed0ffe92364ee796f2234998f6f20",
-        "channelname": "justitia-chan1"
-    }
-  ]
-});
-
-mock.onGet('/api/blocksByHour/1').reply(200, {
-  "rows": [
-    {
-        "datetime": "2018-11-04T03:00:00.000Z",
-        "count": "20"
-    },
-    {
-        "datetime": "2018-11-04T04:00:00.000Z",
-        "count": "10"
-    },
-    {
-        "datetime": "2018-11-04T05:00:00.000Z",
-        "count": "40"
-    },
-    {
-        "datetime": "2018-11-04T06:00:00.000Z",
-        "count": "50"
-    },
-    {
-        "datetime": "2018-11-04T07:00:00.000Z",
-        "count": "900"
-    },
-    {
-        "datetime": "2018-11-04T08:00:00.000Z",
-        "count": "20"
-    }
-  ]
-});
-
-
-mock.onGet('/api/blocksByMinute/1').reply(200,{
-  "rows": [
-    {
-        "datetime": "2018-11-05T02:25:00.000Z",
-        "count": "100"
-    },
-    {
-        "datetime": "2018-11-05T02:26:00.000Z",
-        "count": "0"
-    },
-    {
-        "datetime": "2018-11-05T02:27:00.000Z",
-        "count": "80"
-    },
-    {
-        "datetime": "2018-11-05T02:28:00.000Z",
-        "count": "0"
-    },
-    {
-        "datetime": "2018-11-05T02:29:00.000Z",
-        "count": "0"
-    },
-    {
-        "datetime": "2018-11-05T02:30:00.000Z",
-        "count": "0"
-    }
-  ]
-})
-
-mock.onGet('/api/changeChannel').reply(200,{
-    "currentChannel": "justitia-chan1"
-})
 
 mock.onGet('/api/curChannel').reply(200,{
   "currentChannel": "justitia-chan1"
@@ -496,91 +215,6 @@ mock.onGet('/api/status').reply(200,{
   
 })
 
-mock.onGet('/api/nodesStatus').reply(200,{
-  "nodes": [
-    {
-        "status": "RUNNING",
-        "server_hostname": "127.0.0.1:47768"
-    }
-  ]
-})
-
-mock.onGet('/api/txByOrg').reply(200,{
-  "rows": [
-    {
-        "count": "0",
-        "creator_msp_id": null
-    }
-  ]
-})
-
-mock.onGet('/api/txByHour/1').reply(200,{
-  "rows": [
-    {
-        "datetime": "2018-11-04T03:00:00.000Z",
-        "count": "10"
-    },
-    {
-        "datetime": "2018-11-04T04:00:00.000Z",
-        "count": "110"
-    },
-    {
-        "datetime": "2018-11-04T05:00:00.000Z",
-        "count": "40"
-    },
-    {
-        "datetime": "2018-11-04T06:00:00.000Z",
-        "count": "7"
-    },
-    {
-        "datetime": "2018-11-04T07:00:00.000Z",
-        "count": "20"
-    },
-    {
-        "datetime": "2018-11-04T08:00:00.000Z",
-        "count": "59"
-    },
-    {
-        "datetime": "2018-11-04T09:00:00.000Z",
-        "count": "60"
-    }
-  ]
-})
-
-mock.onGet('/api/txByMinute/1').reply(200,{
-  "rows": [
-    {
-        "datetime": "2018-11-05T02:29:00.000Z",
-        "count": "10"
-    },
-    {
-        "datetime": "2018-11-05T02:30:00.000Z",
-        "count": "20"
-    },
-    {
-        "datetime": "2018-11-05T02:31:00.000Z",
-        "count": "30"
-    },
-    {
-        "datetime": "2018-11-05T02:32:00.000Z",
-        "count": "40"
-    },
-    {
-        "datetime": "2018-11-05T02:33:00.000Z",
-        "count": "50"
-    },
-    {
-        "datetime": "2018-11-05T02:34:00.000Z",
-        "count": "60"
-    },
-    {
-        "datetime": "2018-11-05T02:35:00.000Z",
-        "count": "70"
-    }
-  ]
-})
-
-
 const blockList = (channel) => (dispatch) => {
   return axios.get(`/api/blockAndTxList`)
     .then(resp => {
@@ -589,16 +223,6 @@ const blockList = (channel) => (dispatch) => {
       console.error(error)
     })
 }
-
-const contractList = (channel) => (dispatch) => {
-  return axios.get(`/api/contract`)
-    .then(resp => {
-      dispatch(actions.getContractList(resp.data))
-    }).catch(error => {
-      console.error(error)
-    })
-}
-
 // table channel
 const channels = () => (dispatch) => {
   return axios.get('/api/channels/info')
@@ -617,15 +241,6 @@ const channels = () => (dispatch) => {
     })
 }
 
-const nodeList = (channel) => (dispatch) => {
-  return axios.get(`/api/nodes`)
-    .then(resp => {
-      dispatch(actions.getNodeList(resp.data))
-    }).catch(error => {
-      console.error(error)
-    })
-}
-
 const transaction = (channel, transactionId) => (dispatch) => {
   return axios.get(`/api/transaction`)
     .then(resp => {
@@ -635,50 +250,6 @@ const transaction = (channel, transactionId) => (dispatch) => {
     })
 }
 
-const transactionList = (channel) => (dispatch) => {
-  return axios.get(`/api/txList`)
-    .then(resp => {
-      resp.data.rows.forEach(element => {
-        element.createdt = moment(element.createdt)
-          .tz(moment.tz.guess())
-          .format('M-D-YYYY h:mm A zz')
-      })
-
-      dispatch(actions.getTransactionList(resp.data))
-    }).catch(error => {
-      console.error(error)
-    })
-}
-
-const blockPerHour = channel => dispatch => {
-  return axios.get(`/api/blocksByHour/1`)
-    .then(resp => {
-      dispatch(actions.getBlockPerHour(resp.data))
-    })
-    .catch(error => {
-      console.error(error)
-    })
-}
-
-const blockPerMin = channel => dispatch => {
-  return axios.get(`/api/blocksByMinute/1`)
-    .then(resp => {
-      dispatch(actions.getBlockPerMin(resp.data))
-    })
-    .catch(error => {
-      console.error(error)
-    })
-}
-
-const changeChannel = channel => dispatch => {
-  return axios.get(`/api/changeChannel`)
-    .then(resp => {
-      dispatch(actions.updateChannel(resp.data))
-    })
-    .catch(error => {
-      console.error(error)
-    })
-}
 
 const channel = () => dispatch => {
   return axios.get('/api/curChannel')
@@ -710,66 +281,12 @@ const dashStats = () => dispatch => {
     })
 }
 
-const notification = notification => dispatch => {
-  var notify = JSON.parse(notification)
-  dispatch(actions.getNotification(notify))
-}
 
-const nodeStatus = channel => dispatch => {
-  return axios.get(`/api/nodesStatus`)
-    .then(resp => {
-      dispatch(actions.getNodeStatus(resp.data))
-    })
-    .catch(error => {
-      console.error(error)
-    })
-}
-
-const transactionByOrg = channel => dispatch => {
-  return axios.get(`/api/txByOrg`)
-    .then(resp => {
-      dispatch(actions.getTransactionByOrg(resp.data))
-    })
-    .catch(error => {
-      console.error(error)
-    })
-}
-
-const transactionPerHour = channel => dispatch => {
-  return axios.get(`/api/txByHour/1`)
-    .then(resp => {
-      dispatch(actions.getTransactionPerHour(resp.data))
-    })
-    .catch(error => {
-      console.error(error)
-    })
-}
-
-const transactionPerMin = channel => dispatch => {
-  return axios.get(`/api/txByMinute/1`)
-    .then(resp => {
-      dispatch(actions.getTransactionPerMin(resp.data))
-    })
-    .catch(error => {
-      console.error(error)
-    })
-}
 export default {
   blockList,
-  contractList,
   channels,
-  nodeList,
   transaction,
-  transactionList,
-  blockPerHour,
-  blockPerMin,
-  transactionPerHour,
-  transactionPerMin,
-  transactionByOrg,
-  notification,
   dashStats,
   channel,
   channelList,
-  changeChannel,
-  nodeStatus
 }

@@ -22,41 +22,11 @@ const blockListReducer = (state = initialState, action) => {
   }
 }
 
-const contractListReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case types.CONTRACT_LIST: {
-      return ({
-        rows: action.payload.contract,
-        loaded: true,
-        errors: action.error
-      })
-    }
-    default: {
-      return state
-    }
-  }
-}
-
 const channelsReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.CHANNELS: {
       return ({
         rows: action.payload.channels,
-        loaded: true,
-        errors: action.error
-      })
-    }
-    default: {
-      return state
-    }
-  }
-}
-
-const nodeListReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case types.NODE_LIST: {
-      return ({
-        rows: action.payload.nodes,
         loaded: true,
         errors: action.error
       })
@@ -75,51 +45,6 @@ const transactionReducer = (state = initialState, action) => {
         loaded: true,
         errors: action.error
       })
-    }
-    default: {
-      return state
-    }
-  }
-}
-
-const transactionListReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case types.TRANSACTION_LIST: {
-      return ({
-        rows: action.payload,
-        loaded: true,
-        errors: action.error
-      })
-    }
-    default: {
-      return state
-    }
-  }
-}
-
-const blockPerHourReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case types.BLOCK_CHART_HOUR: {
-      return {
-        rows: action.payload.blockPerHour.rows,
-        loaded: true,
-        errors: action.errors
-      }
-    }
-    default: {
-      return state
-    }
-  }
-}
-
-const blockPerMinReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case types.BLOCK_CHART_MIN: {
-      return {
-        rows: action.payload.blockPerMin.rows,
-        loaded: true,
-        errors: action.errors
-      }
     }
     default: {
       return state
@@ -167,94 +92,14 @@ const dashStatsReducer = (state = initialState, action) => {
   }
 }
 
-const notificationReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case types.NOTIFICATION_LOAD: {
-      return action.payload.notification
-    }
-    default: {
-      return state
-    }
-  }
-}
-
-const nodeStatusReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case types.NODE_STATUS: {
-      return {
-        list: action.payload.nodes,
-        loaded: true,
-        errors: action.errors
-      }
-    }
-    default: {
-      return state
-    }
-  }
-}
-
-const transactionByOrgReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case types.TRANSACTION_CHART_ORG: {
-      return {
-        rows: action.payload.rows,
-        loaded: true,
-        errors: action.errors
-      }
-    }
-    default: {
-      return state
-    }
-  }
-}
-
-const transactionPerHourReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case types.TRANSACTION_CHART_HOUR: {
-      return {
-        rows: action.payload.transactionPerHour.rows,
-        loaded: true,
-        errors: action.errors
-      }
-    }
-    default: {
-      return state
-    }
-  }
-}
-
-const transactionPerMinReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case types.TRANSACTION_CHART_MIN: {
-      return {
-        rows: action.payload.transactionPerMin.rows,
-        loaded: true,
-        errors: action.errors
-      }
-    }
-    default: {
-      return state
-    }
-  }
-}
 
 const reducer = combineReducers({
   blockList: blockListReducer,
-  contractList: contractListReducer,
   channels: channelsReducer,
-  nodeList: nodeListReducer,
   transaction: transactionReducer,
-  transactionList: transactionListReducer,
-  blockPerHour: blockPerHourReducer,
-  blockPerMin: blockPerMinReducer,
   channel: channelReducer,
   channelList: channelListReducer,
-  dashStats: dashStatsReducer,
-  notification: notificationReducer,
-  nodeStatus: nodeStatusReducer,
-  transactionByOrg: transactionByOrgReducer,
-  transactionPerHour: transactionPerHourReducer,
-  transactionPerMin: transactionPerMinReducer
+  dashStats: dashStatsReducer
 })
 
 export default reducer

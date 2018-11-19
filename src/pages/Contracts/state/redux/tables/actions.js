@@ -1,10 +1,6 @@
 
 import types from './types'
 
-const getBlockList = (blockList) => ({
-  type: types.BLOCK_LIST,
-  payload: blockList
-})
 
 const getContractList = (contractList) => ({
   type: types.CONTRACT_LIST,
@@ -16,29 +12,6 @@ const getChannels = (channels) => ({
   payload: channels
 })
 
-const getNodeList = (nodeList) => ({
-  type: types.NODE_LIST,
-  payload: nodeList
-})
-
-const getTransaction = (transaction) => ({
-  type: types.TRANSACTION,
-  payload: transaction
-})
-
-const getTransactionList = (transactionList) => ({
-  type: types.TRANSACTION_LIST,
-  payload: transactionList
-})
-const getBlockPerHour = (blockPerHour) => ({
-  type: types.BLOCK_CHART_HOUR,
-  payload: { blockPerHour }
-})
-
-const getBlockPerMin = (blockPerMin) => ({
-  type: types.BLOCK_CHART_MIN,
-  payload: { blockPerMin }
-})
 
 const getChannel = (channel) => ({
   type: types.CHANNEL,
@@ -55,51 +28,10 @@ const getDashStats = (dashStats) => ({
   payload: dashStats
 })
 
-const getNotification = (notification) => ({
-  type: types.NOTIFICATION_LOAD,
-  payload: { notification }
-})
-
-const getNodeStatus = (nodeStatus) => ({
-  type: types.NODE_STATUS,
-  payload: nodeStatus
-})
-
-const getTransactionByOrg = (transactionByOrg) => ({
-  type: types.TRANSACTION_CHART_ORG,
-  payload: transactionByOrg
-})
-
-const getTransactionPerHour = (transactionPerHour) => ({
-  type: types.TRANSACTION_CHART_HOUR,
-  payload: { transactionPerHour }
-})
-
-const getTransactionPerMin = (transactionPerMin) => ({
-  type: types.TRANSACTION_CHART_MIN,
-  payload: { transactionPerMin }
-})
-
-const updateChannel = (channel) => ({
-  type: types.CHANGE_CHANNEL,
-  payload: { channel }
-})
 export default {
-  getBlockList,
   getContractList,
   getChannels,
-  getNodeList,
-  getTransaction,
-  getTransactionList,
-  getBlockPerHour,
-  getBlockPerMin,
   getChannel,
   getChannelList,
-  getDashStats,
-  getNotification,
-  getNodeStatus,
-  getTransactionByOrg,
-  getTransactionPerHour,
-  getTransactionPerMin,
-  updateChannel
+  getDashStats
 }

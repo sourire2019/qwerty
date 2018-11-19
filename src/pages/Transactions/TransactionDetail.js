@@ -2,9 +2,7 @@ import React, {Component} from "react";
 
 import moment from "moment-timezone";
 import {
-  Table,
-  Card,
-  CardBody
+  Table
 } from "reactstrap";
 
 import {FormattedMessage} from 'react-intl';

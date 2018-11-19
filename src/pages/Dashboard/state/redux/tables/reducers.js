@@ -1,92 +1,13 @@
-/**
- *    SPDX-License-Identifier: Apache-2.0
- */
-
 import { combineReducers } from 'redux'
 import types from './types'
 
 const initialState = {}
-
-const blockListReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case types.BLOCK_LIST: {
-      return ({
-        rows: action.payload.rows,
-        loaded: true,
-        errors: action.error
-      })
-    }
-    default: {
-      return state
-    }
-  }
-}
-
-const contractListReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case types.CONTRACT_LIST: {
-      return ({
-        rows: action.payload.contract,
-        loaded: true,
-        errors: action.error
-      })
-    }
-    default: {
-      return state
-    }
-  }
-}
 
 const channelsReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.CHANNELS: {
       return ({
         rows: action.payload.channels,
-        loaded: true,
-        errors: action.error
-      })
-    }
-    default: {
-      return state
-    }
-  }
-}
-
-const nodeListReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case types.NODE_LIST: {
-      return ({
-        rows: action.payload.nodes,
-        loaded: true,
-        errors: action.error
-      })
-    }
-    default: {
-      return state
-    }
-  }
-}
-
-const transactionReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case types.TRANSACTION: {
-      return ({
-        transaction: action.payload.row,
-        loaded: true,
-        errors: action.error
-      })
-    }
-    default: {
-      return state
-    }
-  }
-}
-
-const transactionListReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case types.TRANSACTION_LIST: {
-      return ({
-        rows: action.payload,
         loaded: true,
         errors: action.error
       })
@@ -167,47 +88,6 @@ const dashStatsReducer = (state = initialState, action) => {
   }
 }
 
-const notificationReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case types.NOTIFICATION_LOAD: {
-      return action.payload.notification
-    }
-    default: {
-      return state
-    }
-  }
-}
-
-const nodeStatusReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case types.NODE_STATUS: {
-      return {
-        list: action.payload.nodes,
-        loaded: true,
-        errors: action.errors
-      }
-    }
-    default: {
-      return state
-    }
-  }
-}
-
-const transactionByOrgReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case types.TRANSACTION_CHART_ORG: {
-      return {
-        rows: action.payload.rows,
-        loaded: true,
-        errors: action.errors
-      }
-    }
-    default: {
-      return state
-    }
-  }
-}
-
 const transactionPerHourReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.TRANSACTION_CHART_HOUR: {
@@ -239,20 +119,12 @@ const transactionPerMinReducer = (state = initialState, action) => {
 }
 
 const reducer = combineReducers({
-  blockList: blockListReducer,
-  contractList: contractListReducer,
   channels: channelsReducer,
-  nodeList: nodeListReducer,
-  transaction: transactionReducer,
-  transactionList: transactionListReducer,
   blockPerHour: blockPerHourReducer,
   blockPerMin: blockPerMinReducer,
   channel: channelReducer,
   channelList: channelListReducer,
   dashStats: dashStatsReducer,
-  notification: notificationReducer,
-  nodeStatus: nodeStatusReducer,
-  transactionByOrg: transactionByOrgReducer,
   transactionPerHour: transactionPerHourReducer,
   transactionPerMin: transactionPerMinReducer
 })
