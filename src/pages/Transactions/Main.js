@@ -2,6 +2,7 @@ import TableList from './TableList';
 import React, { Component } from 'react';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import cookie from 'react-cookies';
+import './main.css'
 
 function getLocale(lang) {
   let result = {};

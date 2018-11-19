@@ -2,8 +2,44 @@ import actions from './actions'
 import moment from 'moment-timezone'
 import { get } from 'services/request.js'
 
+import axios from 'axios'
+var MockAdapter = require('axios-mock-adapter');
+var mock = new MockAdapter(axios);
+
+mock.onGet('/api/channels').reply(200,{
+  "channels": [
+    "justitia-chan1"
+  ]
+})
+
+mock.onGet('/api/curChannel').reply(200,{
+  "currentChannel": "justitia-chan1"
+})
+
+const channel = () => dispatch => {
+  return axios.get('/api/curChannel')
+    .then(resp => {
+      dispatch(actions.getChannel(resp.data))
+    })
+    .catch(error => {
+      console.error(error)
+    })
+}
+
+const channelList = () => (dispatch) => {
+  return axios.get('/api/channels')
+    .then(resp => {
+      dispatch(actions.getChannelList(resp.data))
+    })
+    .catch(error => {
+      console.error(error)
+    })
+}
+
+
+
 const blockPerHour = channel => dispatch => {
-  return get(`/api/blocksByHour/${channel}/1`)
+  return get(`/api/blocksByHour/${channel}/0.1`)
     .then(resp => {
       dispatch(actions.getBlockPerHour(resp))
     })
@@ -13,7 +49,7 @@ const blockPerHour = channel => dispatch => {
 }
 
 const blockPerMin = channel => dispatch => {
-  return get(`/api/blocksByMinute/${channel}/1`)
+  return get(`/api/blocksByMinute/${channel}/0.1`)
     .then(resp => {
       dispatch(actions.getBlockPerMin(resp))
     })
@@ -32,25 +68,25 @@ const changeChannel = channel => dispatch => {
     })
 }
 
-const channel = () => dispatch => {
-  return get('/api/curChannel')
-    .then(resp => {
-      dispatch(actions.getChannel(resp))
-    })
-    .catch(error => {
-      console.error(error)
-    })
-}
+// const channel = () => dispatch => {
+//   return get('/api/curChannel')
+//     .then(resp => {
+//       dispatch(actions.getChannel(resp))
+//     })
+//     .catch(error => {
+//       console.error(error)
+//     })
+// }
 
-const channelList = () => dispatch => {
-  return get('/api/channels')
-    .then(resp => {
-      dispatch(actions.getChannelList(resp))
-    })
-    .catch(error => {
-      console.error(error)
-    })
-}
+// const channelList = () => dispatch => {
+//   return get('/api/channels')
+//     .then(resp => {
+//       dispatch(actions.getChannelList(resp))
+//     })
+//     .catch(error => {
+//       console.error(error)
+//     })
+// }
 
 const dashStats = channel => dispatch => {
   return get(`/api/status/${channel}`)
@@ -88,7 +124,7 @@ const transactionByOrg = channel => dispatch => {
 }
 
 const transactionPerHour = channel => dispatch => {
-  return get(`/api/txByHour/${channel}/1`)
+  return get(`/api/txByHour/${channel}/0.1`)
     .then(resp => {
       dispatch(actions.getTransactionPerHour(resp))
     })
@@ -98,7 +134,7 @@ const transactionPerHour = channel => dispatch => {
 }
 
 const transactionPerMin = channel => dispatch => {
-  return get(`/api/txByMinute/${channel}/1`)
+  return get(`/api/txByMinute/${channel}/0.1`)
     .then(resp => {
       dispatch(actions.getTransactionPerMin(resp))
     })

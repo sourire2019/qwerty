@@ -48,24 +48,24 @@ class Dashboard extends Component {
   async componentWillMount () {
 
     await this.props.getchannels()
+    const currentChannel = this.props.currentChannel
+    await this.props.getdashStats(currentChannel)
+    await this.props.gettransactionPerMin(currentChannel)
+    await this.props.getblockPerMin(currentChannel)
+    await this.props.gettransactionPerHour(currentChannel)
+    await this.props.getblockPerHour(currentChannel)
 
-    await this.props.getdashStats()
-    await this.props.gettransactionPerMin()
-    await this.props.getblockPerMin()
-    await this.props.gettransactionPerHour()
-    await this.props.getblockPerHour()
-
-    setInterval(() => this.syncData(), 5000);
+    setInterval(() => this.syncData(currentChannel), 5000);
   }
 
-  async syncData() {
+  async syncData(currentChannel) {
     await Promise.all([
       this.props.getchannels(),
-      this.props.getdashStats(),
-      this.props.gettransactionPerMin(),
-      this.props.getblockPerMin(),
-      this.props.gettransactionPerHour(),
-      this.props.getblockPerHour()
+      this.props.getdashStats(currentChannel),
+      this.props.gettransactionPerMin(currentChannel),
+      this.props.getblockPerMin(currentChannel),
+      this.props.gettransactionPerHour(currentChannel),
+      this.props.getblockPerHour(currentChannel)
     ])
    
   }
