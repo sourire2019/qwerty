@@ -26,16 +26,10 @@ const asideMenuConfig = [
     icon: 'pe-7s-news-paper',
   },
   {
-    path: '/Transactions',
+    path: '/transactions',
     name: 'transactions',
     icon: 'pe-7s-wallet',
-  },
-  {
-    upgrade: true,
-    path: '/upgrade',
-    name: 'Upgrade to PRO',
-    icon: 'pe-7s-rocket',
-  },
+  }
 ];
 
 export default asideMenuConfig;

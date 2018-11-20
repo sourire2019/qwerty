@@ -48,7 +48,7 @@ export class LiteTable extends Component {
   async componentDidMount () {
     let arr = [];
     let selectedValue ={}
-    await this.props.getChannels()
+    //await this.props.getChannels()
     const currentChannel = this.props.currentChannel
     await this.props.getnodeList(currentChannel)
 
@@ -77,7 +77,7 @@ export class LiteTable extends Component {
   async syncData(currentChannel) {
     await Promise.all([
       this.props.getnodeList(currentChannel),
-      this.props.getChannels(),
+      //this.props.getChannels(),
     ])
    
   }
@@ -155,8 +155,8 @@ export default compose(
       nodeList : nodeListSelector(state)
     }),
     {
-      getnodeList: nodeList,
-      getChannels : channels
+      getnodeList: nodeList
+      //getChannels : channels
     }
   )
 )(LiteTable);

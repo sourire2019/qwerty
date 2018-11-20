@@ -47,7 +47,6 @@ class Dashboard extends Component {
 
   async componentWillMount () {
 
-    await this.props.getchannels()
     const currentChannel = this.props.currentChannel
     await this.props.getdashStats(currentChannel)
     await this.props.gettransactionPerMin(currentChannel)
@@ -60,7 +59,6 @@ class Dashboard extends Component {
 
   async syncData(currentChannel) {
     await Promise.all([
-      this.props.getchannels(),
       this.props.getdashStats(currentChannel),
       this.props.gettransactionPerMin(currentChannel),
       this.props.getblockPerMin(currentChannel),
@@ -72,7 +70,6 @@ class Dashboard extends Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      channels : nextProps.channels,
       dashStats : nextProps.dashStats,
       transactionPerMin : nextProps.transactionPerMin.rows,
       blockPerMin : nextProps.blockPerMin.rows,
@@ -423,7 +420,6 @@ export default compose(
       blockPerHour : blockPerHourSelector(state)
     }),
     {
-      getchannels : channels,
       getdashStats : dashStats,
       gettransactionPerMin : transactionPerMin,
       getblockPerMin : blockPerMin,

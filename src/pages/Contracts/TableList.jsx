@@ -49,7 +49,7 @@ class TableList extends Component {
 
     this.fetchData(this.state.currentPage);
 
-    await this.props.getChannels()
+    //await this.props.getChannels()
     const currentChannel = this.props.currentChannel
     await this.props.getcontractList(currentChannel,10,0)
     await this.props.getdashStats(currentChannel)
@@ -62,7 +62,7 @@ class TableList extends Component {
   async syncData(currentChannel) {
     await Promise.all([
       this.props.getcontractList(currentChannel,10,0),
-      this.props.getChannels(),
+     // this.props.getChannels(),
       this.props.getdashStats(currentChannel)
     ])
     this.setState({currentPage : 1})
@@ -286,7 +286,7 @@ export default compose(
     }),
     {
       getcontractList: contractList,
-      getChannels : channels,
+      //getChannels : channels,
       getdashStats : dashStats
     }
   )

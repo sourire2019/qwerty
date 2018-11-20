@@ -21,7 +21,7 @@ import Dialog from 'react-bootstrap-dialog';
 import Transaction from './Transaction';
 import Block from './Block';
 
-const {blockList, transaction, channels, dashStats } = tableOperations;
+const {blockList, transaction, dashStats } = tableOperations;
 const {channelsSelector, blockListSelector, transactionSelector, currentChannelSelector, dashStatsSelector } = tableSelectors
 
 
@@ -32,7 +32,6 @@ class TableList extends Component {
     super(props);
     this.state = {
       blockList : [],
-      channels : [],
       currentPage : 1,
       transactions : [],
       latestBlock : 0
@@ -46,33 +45,11 @@ class TableList extends Component {
 
     let arr = [];
     let selectedValue ={}
-    await this.props.getChannels()
     const currentChannel = this.props.currentChannel
     await this.props.getblockList(currentChannel, 10, 0)
     await this.props.getTransaction(currentChannel) 
     await this.props.getdashStats(currentChannel)
 
-
-    if (this.props.channels) {
-      this.props.channels.forEach(element => {
-      if (element.genesis_block_hash === this.props.currentChannel) {
-        selectedValue = {
-          value: element.genesis_block_hash,
-          label: element.channelname
-        };
-
-      }
-      arr.push({
-        value: element.genesis_block_hash,
-        label: element.channelname
-      });
-    });
-    }
-    this.setState({
-      channels: arr,
-      selectedChannel: selectedValue,
-      latestBlock : this.props.dashStats.latestBlock
-    });
    setInterval(() => this.syncData(this.props.currentChannel), 5000);
   }
 
@@ -313,14 +290,12 @@ export default compose(
   connect(
     state => ({
       currentChannel: currentChannelSelector(state),
-      channels : channelsSelector(state),
       blockList : blockListSelector(state),
       dashStats : dashStatsSelector(state),
       transaction: transactionSelector(state)
     }),
     {
       getblockList: blockList,
-      getChannels : channels,
       getdashStats : dashStats,
       getTransaction : transaction
     }

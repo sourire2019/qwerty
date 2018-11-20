@@ -147,15 +147,18 @@ class TableList extends Component {
               dataIndex="txhash"
               cell= { row =>(
                   <span>
-                <a
-                  className="partialHash"
-                  onClick={() => this.handleDialogOpenTransactions(row)}
-                  href="#/transactions"
-                >
-                  {row.slice(0, 8)}
-                  {!row ? "" : "... "}
-                </a>
-              </span>
+                    <a
+                      className="partialHash"
+                      onClick={() => this.handleDialogOpenTransactions(row)}
+                      href="#/transactions"
+                    >
+                      <div className="fullHash" id="showblockhashId">
+                        {row}
+                      </div>{" "}
+                      {row.slice(0, 8)}
+                      {!row ? "" : "... "}
+                    </a>
+                  </span>
                 )}
               width={100} />
         );break
@@ -177,7 +180,10 @@ class TableList extends Component {
           />}
             dataIndex="contractname"
             cell= { row =>(
-                  <span>
+                  <span className="partialHash">
+                    <div className="fullHash" id="showblockhashId">
+                        {row}
+                      </div>{" "}
                   {row.slice(0, 8)}
                   {!row ? "" : "... "}
               </span>
@@ -203,7 +209,10 @@ class TableList extends Component {
           />}
             dataIndex="txhash"
             cell= { row =>(
-                  <span>
+                  <span className="partialHash">
+                    <div className="fullHash" id="showblockhashId">
+                        {row}
+                    </div>{" "}
                   {row.slice(0, 8)}
                   {!row ? "" : "... "}
               </span>
@@ -219,7 +228,10 @@ class TableList extends Component {
           />}
             dataIndex="from"
             cell= { row =>(
-              <span>
+              <span className="partialHash">
+                <div className="fullHash" id="showblockhashId">
+                  {row}
+                </div>{" "}
                 {row.slice(0, 8)}
                 {!row ? "" : "... "}
               </span>
@@ -255,7 +267,10 @@ class TableList extends Component {
           />}
             dataIndex="to"
             cell= { row =>(
-              <span>
+              <span className="partialHash">
+                <div className="fullHash" id="showblockhashId">
+                  {row}
+                </div>{" "}
                 {row.slice(0, 8)}
                 {!row ? "" : "... "}
                
