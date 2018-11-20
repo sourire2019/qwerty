@@ -20,6 +20,7 @@ import {connect} from "react-redux";
 import Dialog from 'react-bootstrap-dialog';
 import Transaction from './Transaction';
 import Block from './Block';
+import cookie from 'react-cookies';
 
 const {blockList, transaction, dashStats } = tableOperations;
 const {channelsSelector, blockListSelector, transactionSelector, currentChannelSelector, dashStatsSelector } = tableSelectors
@@ -45,18 +46,17 @@ class TableList extends Component {
 
     let arr = [];
     let selectedValue ={}
-    const currentChannel = this.props.currentChannel
+    const currentChannel = cookie.load("changechain")
     await this.props.getblockList(currentChannel, 10, 0)
     await this.props.getTransaction(currentChannel) 
     await this.props.getdashStats(currentChannel)
 
-   setInterval(() => this.syncData(this.props.currentChannel), 5000);
+   setInterval(() => this.syncData(cookie.load("changechain")), 5000);
   }
 
   async syncData(currentChannel) {
     await Promise.all([
       this.props.getblockList(currentChannel,10,0),
-      this.props.getChannels(),
       this.props.getdashStats(currentChannel)
     ])
     this.setState({currentPage : 1}) 
@@ -71,7 +71,7 @@ class TableList extends Component {
   }
 
   fetchData = async(currentPage) => {
-    await this.props.getblockList(this.props.currentChannel,10, currentPage-1)
+    await this.props.getblockList(cookie.load("changechain"),10, currentPage-1)
   };
 
 
@@ -185,8 +185,8 @@ class TableList extends Component {
                   <div className="fullHash" id="showblockhashId">
                     {row}
                   </div>{" "}
-                  {row.slice(0, 18)}
-                  {!row ? "" : "... "}
+                  {}
+                  {!row ? "" : (row.length>=18?(row.slice(0, 18) +"....") : (row))}
                 </a>
               </span>
                 )}
@@ -205,8 +205,7 @@ class TableList extends Component {
                 <div className="fullHash" id="showPresh">
                   {row}
                 </div>{" "}
-                {row.slice(0, 18)}
-                {!row ? "" : "... "}
+                {!row ? "" : (row.length>=18?(row.slice(0, 18) +"....") : (row))}
               </span>
                 )}
             width={200} />

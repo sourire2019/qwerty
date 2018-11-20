@@ -9,6 +9,7 @@ import StatsCard from 'components/StatsCard';
 import compose from "recompose/compose";
 import {connect} from "react-redux";
 import { FormattedMessage } from 'react-intl';
+import cookie from 'react-cookies';
 
 import {tableOperations, tableSelectors} from "state/redux/tables/";
 
@@ -47,7 +48,7 @@ class Dashboard extends Component {
 
   async componentWillMount () {
 
-    const currentChannel = this.props.currentChannel
+    const currentChannel = cookie.load("changechain")
     await this.props.getdashStats(currentChannel)
     await this.props.gettransactionPerMin(currentChannel)
     await this.props.getblockPerMin(currentChannel)

@@ -8,7 +8,8 @@ import {tableOperations, tableSelectors} from "state/redux/tables/";
 import config from './config.json'
 import { FormattedMessage } from 'react-intl'
 import 'flag-icon-css/css/flag-icon.min.css';
-import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/css/bootstrap.css';
+import cookie from 'react-cookies';
 
 const {nodeList, channels } = tableOperations;
 const {channelsSelector, nodeListSelector, currentChannelSelector} = tableSelectors
@@ -49,12 +50,12 @@ export class LiteTable extends Component {
     let arr = [];
     let selectedValue ={}
     //await this.props.getChannels()
-    const currentChannel = this.props.currentChannel
+    const currentChannel = cookie.load("changechain")
     await this.props.getnodeList(currentChannel)
 
     if (this.props.channels) {
       this.props.channels.forEach(element => {
-      if (element.genesis_block_hash === this.props.currentChannel) {
+      if (element.genesis_block_hash === currentChannel) {
         selectedValue = {
           value: element.genesis_block_hash,
           label: element.channelname
@@ -71,7 +72,7 @@ export class LiteTable extends Component {
       channels: arr,
       selectedChannel: selectedValue
     });
-   setInterval(() => this.syncData(this.props.currentChannel), 5000);
+   setInterval(() => this.syncData(currentChannel), 5000);
   }
 
   async syncData(currentChannel) {
@@ -150,7 +151,7 @@ export class LiteTable extends Component {
 export default compose(
   connect(
     state => ({
-      currentChannel: currentChannelSelector(state),
+      //currentChannel: currentChannelSelector(state),
       channels : channelsSelector(state),
       nodeList : nodeListSelector(state)
     }),

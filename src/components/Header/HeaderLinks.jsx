@@ -13,13 +13,15 @@ const {
 
 const {
   changeChannel,
-  channels
+  channels,
+  channel
 } = tableOperations
 
 class HeaderLinks extends Component {
 
   constructor(props) {
     super(props);
+    this.handleChange.bind(this);
     this.state = {
       channels : [],
       selectedChannel: {},
@@ -27,18 +29,26 @@ class HeaderLinks extends Component {
     };
   }
 
-  componentDidMount() {
+  async componentWillMount() {
     let arr = [];
     let selectedValue ={};
     let Menu = [];
+    let flag = false;
+    await this.props.getChannels()
+    const currentChannel = this.props.currentChannel
+    if(cookie.load("changechain") ==undefined){
+      cookie.save("changechain", currentChannel)
+    }
     if (this.props.channels) {
       this.props.channels.forEach(element => {
-      if (element.genesis_block_hash === this.props.currentChannel) {
+      if (element.genesis_block_hash === cookie.load("changechain")) {
         selectedValue = {
           value: element.genesis_block_hash,
           label: element.channelname
         };
-
+        flag = true;
+      }else {
+      flag = false;
       }
       arr.push({
         value: element.genesis_block_hash,
@@ -49,6 +59,9 @@ class HeaderLinks extends Component {
       )
     });
     }
+    if(!flag){
+      cookie.save("changechain", currentChannel)
+    }
     this.setState({
       channels: arr,
       selectedChannel: selectedValue
@@ -57,11 +70,11 @@ class HeaderLinks extends Component {
   }
 
   handleChange = async (selectedChannel) => {
-
-    console.log(selectedChannel);
+    cookie.save("changechain", selectedChannel)
     this.setState({selectedChannel});
     this.props.getChangeChannel(selectedChannel);
     await this.syncData(selectedChannel);
+    window.location.reload();
   };
 
   async syncData(currentChannel) {
@@ -169,7 +182,8 @@ export default compose(
     }),
     {
       getChannels : channels,
-      getChangeChannel: changeChannel
+      getChangeChannel: changeChannel,
+      getChannel : channel
     }
   )
 )(HeaderLinks);

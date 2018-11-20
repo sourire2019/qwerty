@@ -4,6 +4,7 @@ import Dialog from 'react-bootstrap-dialog'
 import {Table} from '@icedesign/base';
 import './main.css';
 import TransactionDetail from './TransactionDetail';
+import cookie from 'react-cookies';
 
 class Transaction extends Component {
   constructor(props) {
@@ -27,7 +28,7 @@ class Transaction extends Component {
     this.setState({selection: selection});
   }
   handleDialogOpen  = async(tid) => {
-    await this.props.getTransaction(this.props.currentChannel, tid);
+    await this.props.getTransaction(cookie.load("changechain"), tid);
     this.dialog.show({
       title : <FormattedMessage
                 id="page.localeProvider.txdetails"

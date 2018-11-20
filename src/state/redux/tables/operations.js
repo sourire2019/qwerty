@@ -8,7 +8,7 @@ var mock = new MockAdapter(axios);
 
 mock.onGet('/api/channels').reply(200,{
   "channels": [
-    "justitia-chan1"
+    "justitia-chan3"
   ]
 })
 

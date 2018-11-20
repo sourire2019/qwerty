@@ -47,10 +47,10 @@ class TableList extends Component {
       })
     }
     
-   setInterval(() => this.syncData(this.props.currentChannel), 5000);
+   setInterval(() => this.syncData(), 5000);
   }
 
-  async syncData(currentChannel) {
+  async syncData() {
     await Promise.all([
       this.props.getChannels(),
     ])

@@ -14,6 +14,7 @@ import './main.css';
 import Pagination from "react-js-pagination";
 import"bootstrap/less/bootstrap.less";
 import {tableOperations, tableSelectors} from "state/redux/tables/";
+import cookie from 'react-cookies';
 
 import compose from "recompose/compose";
 import {connect} from "react-redux";
@@ -55,21 +56,21 @@ class TableList extends Component {
 
     this.fetchData(this.state.currentPage);
 
-    await this.props.getChannels()
-    const currentChannel = this.props.currentChannel
+    //await this.props.getChannels()
+    const currentChannel = cookie.load("changechain")
     await this.props.getTransactionList(currentChannel,10,0)
     await this.props.getdashStats(currentChannel)
    
     this.setState({
       txCount : this.props.dashStats.txCount
     });
-   setInterval(() => this.syncData(this.props.currentChannel), 5000);
+   setInterval(() => this.syncData(currentChannel), 5000);
   }
 
   async syncData(currentChannel) {
     await Promise.all([
       this.props.getTransactionList(currentChannel,10,0),
-      this.props.getChannels(),
+      //this.props.getChannels(),
       this.props.getdashStats(currentChannel)
     ])
     this.setState({currentPage : 1})
@@ -85,7 +86,7 @@ class TableList extends Component {
   }
 
   fetchData = async(currentPage) => {
-    await this.props.getTransactionList(this.props.currentChannel,10, currentPage-1)
+    await this.props.getTransactionList(cookie.load("changechain"),10, currentPage-1)
   };
 
 
@@ -95,7 +96,7 @@ class TableList extends Component {
   };
 
   handleDialogOpenTransactions = async(row) => {
-    await this.props.getTransaction(this.props.currentChannel, row);
+    await this.props.getTransaction(cookie.load("changechain"), row);
 
     this.dialog.show({
       title : <FormattedMessage
@@ -155,8 +156,8 @@ class TableList extends Component {
                       <div className="fullHash" id="showblockhashId">
                         {row}
                       </div>{" "}
-                      {row.slice(0, 8)}
-                      {!row ? "" : "... "}
+                      
+                      {!row ? "" : (row.length>=8?(row.slice(0, 8) +"....") : (row))}
                     </a>
                   </span>
                 )}
@@ -184,8 +185,8 @@ class TableList extends Component {
                     <div className="fullHash" id="showblockhashId">
                         {row}
                       </div>{" "}
-                  {row.slice(0, 8)}
-                  {!row ? "" : "... "}
+                  
+                  {!row ? "" : (row.length>=8?(row.slice(0, 8) +"....") : (row))}
               </span>
                 )}
             width={100} />
@@ -213,8 +214,8 @@ class TableList extends Component {
                     <div className="fullHash" id="showblockhashId">
                         {row}
                     </div>{" "}
-                  {row.slice(0, 8)}
-                  {!row ? "" : "... "}
+                  
+                  {!row ? "" : (row.length>=8?(row.slice(0, 8) +"....") : (row))}
               </span>
                 )}
             width={100} />
@@ -232,8 +233,8 @@ class TableList extends Component {
                 <div className="fullHash" id="showblockhashId">
                   {row}
                 </div>{" "}
-                {row.slice(0, 8)}
-                {!row ? "" : "... "}
+                
+                {!row ? "" : (row.length>=8?(row.slice(0, 8) +"....") : (row))}
               </span>
                 )}
             width={100} />
@@ -271,8 +272,8 @@ class TableList extends Component {
                 <div className="fullHash" id="showblockhashId">
                   {row}
                 </div>{" "}
-                {row.slice(0, 8)}
-                {!row ? "" : "... "}
+                
+                {!row ? "" : (row.length>=8?(row.slice(0, 8) +"....") : (row))}
                
               </span>
                 )}
@@ -340,7 +341,7 @@ export default compose(
     }),
     {
       getTransactionList: transactionList,
-      getChannels : channels,
+      //getChannels : channels,
       getdashStats : dashStats,
       getTransaction : transaction
     }

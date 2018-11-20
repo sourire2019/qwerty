@@ -18,6 +18,7 @@ import {tableOperations, tableSelectors} from "state/redux/tables/";
 import compose from "recompose/compose";
 import {connect} from "react-redux";
 
+import cookie from 'react-cookies';
 
 const {
   contractList,
@@ -48,15 +49,14 @@ class TableList extends Component {
   async componentDidMount () {
 
     this.fetchData(this.state.currentPage);
-
     //await this.props.getChannels()
-    const currentChannel = this.props.currentChannel
+    const currentChannel = cookie.load("changechain")
     await this.props.getcontractList(currentChannel,10,0)
     await this.props.getdashStats(currentChannel)
     this.setState({
       contractCount : this.props.dashStats.contractCount
     });
-   setInterval(() => this.syncData(this.props.currentChannel), 5000);
+   setInterval(() => this.syncData(currentChannel), 5000);
   }
 
   async syncData(currentChannel) {
@@ -73,14 +73,14 @@ class TableList extends Component {
     if (nextProps.contractList !== undefined) {
       this.setState({
         contractList : nextProps.contractList, 
-        contractCount : nextProps.dashStats.contractCount
+        contractCount : nextProps.dashStats.contractCount,
+        currentChannel : nextProps.currentChannel
       })
     }
-    
   }
 
   fetchData = async(currentPage) => {
-    await this.props.getcontractList(this.props.currentChannel,10, currentPage-1)
+    await this.props.getcontractList(cookie.load("changechain"),10, currentPage-1)
   };
 
 
@@ -159,8 +159,7 @@ class TableList extends Component {
                 <div className="fullHash" id="showPresh">
                   {row}
                 </div>{" "}
-                {row.slice(0, 18)}
-                {!row ? "" : "... "}
+                {!row ? "" : (row.length>=18?(row.slice(0, 18) +"....") : (row))}
               </span>
             )}
             width={200} />
@@ -199,8 +198,7 @@ class TableList extends Component {
                 <div className="fullHash" id="showPresh">
                   {row}
                 </div>{" "}
-                {row.slice(0, 18)}
-                {!row ? "" : "... "}
+                {!row ? "" : (row.length>=18?(row.slice(0, 18) +"....") : (row))}
               </span>
             )}
             width={200} />
@@ -218,8 +216,7 @@ class TableList extends Component {
                 <div className="fullHash" id="showPresh">
                   {row}
                 </div>{" "}
-                {row.slice(0, 18)}
-                {!row ? "" : "... "}
+                {!row ? "" : (row.length>=18?(row.slice(0, 18) +"....") : (row))}
               </span>
             )}
             width={200} />
@@ -282,7 +279,8 @@ export default compose(
       currentChannel: currentChannelSelector(state),
       channels : channelsSelector(state),
       contractList : contractListSelector(state),
-      dashStats : dashStatsSelector(state)
+      dashStats : dashStatsSelector(state),
+      state: state
     }),
     {
       getcontractList: contractList,
