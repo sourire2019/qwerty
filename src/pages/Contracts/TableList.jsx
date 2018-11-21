@@ -19,6 +19,7 @@ import compose from "recompose/compose"
 import {connect} from "react-redux"
 
 import cookie from 'react-cookies'
+import { Button} from 'reactstrap';
 
 const {
   contractList,
@@ -85,6 +86,9 @@ class TableList extends Component {
   changePage = (currentPage) => {
     this.setState({currentPage : currentPage})
     this.fetchData(currentPage)
+  }
+  addContract = () => {
+    alert("add Contract")
   }
 
   render() {
@@ -243,6 +247,13 @@ class TableList extends Component {
               <Card
                 ctTableFullWidth
                 ctTableResponsive
+                title = {
+                  <Row className="align-items-center mt-3">
+                    <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0" style = {{float : "right"}}>
+                      <Button active block color="primary" aria-pressed="true" onClick ={() => this.addContract()}>Add Contract</Button>
+                    </Col>
+                  </Row>
+                }
                 content={
                   <div >
                     <Table

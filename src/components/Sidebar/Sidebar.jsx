@@ -38,12 +38,12 @@ class Sidebar extends Component {
       >
         <div className="sidebar-background" style={sidebarBackground} />
         <div className="logo">
-          <a href="#" className="simple-text logo-mini">
+          <a href="#/" className="simple-text logo-mini">
             <div className="logo-img">
               <img src={logo} alt="logo_image" />
             </div>
           </a>
-          <a href="#" className="simple-text logo-normal">
+          <a href="#/" className="simple-text logo-normal">
             Justitia 
           </a>
         </div>

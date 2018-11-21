@@ -223,7 +223,7 @@ class TableList extends Component {
                 <button
                   className="partialHash"
                   onClick={() => this.handleDialogOpenTransactions(row)}
-                  disabled= {row ? "" : "disabled"}
+                  disabled= {row ? "" : "true"}
                   href="#/blocks"
                 >
                   <div className="fullHash" id="showTransactionId">
