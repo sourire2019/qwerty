@@ -39,7 +39,7 @@ const channelList = () => (dispatch) => {
 
 
 const blockPerHour = channel => dispatch => {
-  return get(`/api/blocksByHour/${channel}/0.1`)
+  return get(`/api/blocksByHour/${channel}/1`)
     .then(resp => {
       dispatch(actions.getBlockPerHour(resp))
     })
@@ -49,7 +49,7 @@ const blockPerHour = channel => dispatch => {
 }
 
 const blockPerMin = channel => dispatch => {
-  return get(`/api/blocksByMinute/${channel}/0.1`)
+  return get(`/api/blocksByMinute/${channel}/1`)
     .then(resp => {
       dispatch(actions.getBlockPerMin(resp))
     })
@@ -124,7 +124,7 @@ const transactionByOrg = channel => dispatch => {
 }
 
 const transactionPerHour = channel => dispatch => {
-  return get(`/api/txByHour/${channel}/0.1`)
+  return get(`/api/txByHour/${channel}/1`)
     .then(resp => {
       dispatch(actions.getTransactionPerHour(resp))
     })
@@ -134,7 +134,7 @@ const transactionPerHour = channel => dispatch => {
 }
 
 const transactionPerMin = channel => dispatch => {
-  return get(`/api/txByMinute/${channel}/0.1`)
+  return get(`/api/txByMinute/${channel}/1`)
     .then(resp => {
       dispatch(actions.getTransactionPerMin(resp))
     })
@@ -143,8 +143,8 @@ const transactionPerMin = channel => dispatch => {
     })
 }
 
-const contractList = (channel) => (dispatch) => {
-  return get(`/api/contract/${channel}`)
+const contractList = (channel, limit, num) => (dispatch) => {
+  return get(`/api/contract/${channel}/${limit}/${num}`)
     .then(resp => {
       dispatch(actions.getContractList(resp))
     }).catch(error => {

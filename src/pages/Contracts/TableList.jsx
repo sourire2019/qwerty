@@ -61,7 +61,9 @@ class TableList extends Component {
       this.props.getcontractList(currentChannel,10,0),
       this.props.getdashStats(currentChannel)
     ])
-    this.state.currentPage = 1
+    this.setState({
+      currentPage : 1
+    })
    
   }
 

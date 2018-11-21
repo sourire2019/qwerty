@@ -68,12 +68,35 @@ class Dashboard extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    let blockPermin = [], transactionPermin = [], blockPerhour = [], transactionPerhour = []
+
+    if(nextProps.blockPerMin.rows){
+      for(let i = nextProps.blockPerMin.rows.length-6; i < nextProps.blockPerMin.rows.length; i++ ){
+        blockPermin.push(nextProps.blockPerMin.rows[i])
+      }
+    }
+    if(nextProps.transactionPerMin.rows){
+      for(let i = nextProps.transactionPerMin.rows.length-6; i < nextProps.transactionPerMin.rows.length; i++ ){
+        transactionPermin.push(nextProps.transactionPerMin.rows[i])
+      }
+    }
+    if(nextProps.transactionPerHour.rows){
+      for(let i = nextProps.transactionPerHour.rows.length-6; i < nextProps.transactionPerHour.rows.length; i++ ){
+        transactionPerhour.push(nextProps.transactionPerHour.rows[i])
+      }
+    }
+    if(nextProps.blockPerHour.rows){
+      for(let i = nextProps.blockPerHour.rows.length-6; i < nextProps.blockPerHour.rows.length; i++ ){
+        blockPerhour.push(nextProps.blockPerHour.rows[i])
+      }
+    }
+
     this.setState({
       dashStats : nextProps.dashStats,
-      transactionPerMin : nextProps.transactionPerMin.rows,
-      blockPerMin : nextProps.blockPerMin.rows,
-      transactionPerHour : nextProps.transactionPerHour.rows,
-      blockPerHour : nextProps.blockPerHour.rows
+      transactionPerMin : transactionPermin,
+      blockPerMin : blockPermin,
+     transactionPerHour : transactionPerhour,
+      blockPerHour : blockPerhour
     })
   }
 

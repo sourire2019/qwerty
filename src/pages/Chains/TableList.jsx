@@ -55,7 +55,9 @@ class TableList extends Component {
       this.props.getChannels(),
     ])
 
-    this.state.currentPage = 1
+    this.setState({
+      currentPage : 1
+    })
    
   }
 

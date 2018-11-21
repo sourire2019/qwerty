@@ -57,7 +57,9 @@ class TableList extends Component {
       this.props.getblockList(currentChannel,10,0),
       this.props.getdashStats(currentChannel)
     ])
-    this.state.currentPage = 1
+    this.setState({
+      currentPage : 1
+    })
   }
 
   componentWillReceiveProps(nextProps) {

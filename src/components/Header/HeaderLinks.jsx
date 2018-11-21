@@ -38,6 +38,7 @@ class HeaderLinks extends Component {
     const currentChannel = this.props.currentChannel
     if(cookie.load("changechain") ==undefined){
       cookie.save("changechain", currentChannel)
+      window.location.reload()
     }
     if (this.props.channels) {
       this.props.channels.forEach(element => {
