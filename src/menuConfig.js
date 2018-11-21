@@ -6,14 +6,19 @@ const asideMenuConfig = [
     icon: 'pe-7s-graph',
   },
   {
+    path: '/blocks',
+    name: 'Blocks',
+    icon: 'pe-7s-server',
+  },
+  {
     path: '/nodes',
     name: 'Nodes',
     icon: 'pe-7s-bell',
   },
   {
-    path: '/blocks',
-    name: 'Blocks',
-    icon: 'pe-7s-server',
+    path: '/transactions',
+    name: 'transactions',
+    icon: 'pe-7s-wallet',
   },
   {
     path: '/chains',
@@ -25,11 +30,7 @@ const asideMenuConfig = [
     name: 'Contracts',
     icon: 'pe-7s-news-paper',
   },
-  {
-    path: '/transactions',
-    name: 'transactions',
-    icon: 'pe-7s-wallet',
-  }
+  
 ];
 
 export default asideMenuConfig;

@@ -11,8 +11,8 @@ import 'flag-icon-css/css/flag-icon.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import cookie from 'react-cookies';
 
-const {nodeList, channels } = tableOperations;
-const {channelsSelector, nodeListSelector, currentChannelSelector} = tableSelectors
+const {nodeList } = tableOperations;
+const {nodeListSelector, channelsSelector} = tableSelectors
 
 const styles = {
   processing: {
@@ -49,7 +49,6 @@ export class LiteTable extends Component {
   async componentDidMount () {
     let arr = [];
     let selectedValue ={}
-    //await this.props.getChannels()
     const currentChannel = cookie.load("changechain")
     await this.props.getnodeList(currentChannel)
 
@@ -77,8 +76,7 @@ export class LiteTable extends Component {
 
   async syncData(currentChannel) {
     await Promise.all([
-      this.props.getnodeList(currentChannel),
-      //this.props.getChannels(),
+      this.props.getnodeList(currentChannel)
     ])
    
   }
@@ -151,13 +149,11 @@ export class LiteTable extends Component {
 export default compose(
   connect(
     state => ({
-      //currentChannel: currentChannelSelector(state),
       channels : channelsSelector(state),
       nodeList : nodeListSelector(state)
     }),
     {
       getnodeList: nodeList
-      //getChannels : channels
     }
   )
 )(LiteTable);

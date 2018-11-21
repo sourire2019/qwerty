@@ -24,7 +24,6 @@ import TransactionDetail from './TransactionDetail';
 const {
   transactionList, 
   transaction,
-  channels,
   dashStats
 
 } = tableOperations;
@@ -33,7 +32,6 @@ const {
   channelsSelector, 
   transactionListSelector, 
   transactionSelector,
-  currentChannelSelector, 
   dashStatsSelector
 
 } = tableSelectors
@@ -56,7 +54,6 @@ class TableList extends Component {
 
     this.fetchData(this.state.currentPage);
 
-    //await this.props.getChannels()
     const currentChannel = cookie.load("changechain")
     await this.props.getTransactionList(currentChannel,10,0)
     await this.props.getdashStats(currentChannel)
@@ -70,11 +67,9 @@ class TableList extends Component {
   async syncData(currentChannel) {
     await Promise.all([
       this.props.getTransactionList(currentChannel,10,0),
-      //this.props.getChannels(),
       this.props.getdashStats(currentChannel)
     ])
-    this.setState({currentPage : 1})
-   
+      this.state.currentPage = 1
   }
 
   componentWillReceiveProps(nextProps) {
@@ -333,7 +328,6 @@ class TableList extends Component {
 export default compose(
   connect(
     state => ({
-      currentChannel: currentChannelSelector(state),
       channels : channelsSelector(state),
       transactionList : transactionListSelector(state),
       dashStats : dashStatsSelector(state),
@@ -341,7 +335,6 @@ export default compose(
     }),
     {
       getTransactionList: transactionList,
-      //getChannels : channels,
       getdashStats : dashStats,
       getTransaction : transaction
     }

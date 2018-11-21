@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import imagine from 'assets/img/sidebar-3.jpg';
+import imagine from 'assets/img/bg-index.jpg';
 import logo from 'assets/img/jsta.png';
 
 import HeaderLinks from '../Header/HeaderLinks.jsx';
@@ -36,7 +36,7 @@ class Sidebar extends Component {
         data-color="black"
         data-image={imagine}
       >
-        <div className="sidebar-background"  />
+        <div className="sidebar-background" style={sidebarBackground} />
         <div className="logo">
           <a href="#" className="simple-text logo-mini">
             <div className="logo-img">

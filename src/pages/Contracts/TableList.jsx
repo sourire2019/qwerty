@@ -1,35 +1,33 @@
-import React, { Component } from 'react';
-import { Grid, Row, Col } from 'react-bootstrap';
+import React, { Component } from 'react'
+import { Grid, Row, Col } from 'react-bootstrap'
 
-import Card from 'components/Card';
+import Card from 'components/Card'
 
-import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
+import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css'
 
-import {Table} from '@icedesign/base';
-import config from './config.json';
-import { FormattedMessage } from 'react-intl';
-import 'bootstrap/dist/css/bootstrap.css';
-import './main.css';
+import {Table} from '@icedesign/base'
+import config from './config.json'
+import { FormattedMessage } from 'react-intl'
+import 'bootstrap/dist/css/bootstrap.css'
+import './main.css'
 
-import Pagination from "react-js-pagination";
-import"bootstrap/less/bootstrap.less";
-import {tableOperations, tableSelectors} from "state/redux/tables/";
+import Pagination from "react-js-pagination"
+import"bootstrap/less/bootstrap.less"
+import {tableOperations, tableSelectors} from "state/redux/tables/"
 
-import compose from "recompose/compose";
-import {connect} from "react-redux";
+import compose from "recompose/compose"
+import {connect} from "react-redux"
 
-import cookie from 'react-cookies';
+import cookie from 'react-cookies'
 
 const {
   contractList,
-  channels,
   dashStats
-} = tableOperations;
+} = tableOperations
 
 const {
   channelsSelector, 
-  contractListSelector,
-  currentChannelSelector, 
+  contractListSelector, 
   dashStatsSelector
 } = tableSelectors
 
@@ -37,35 +35,33 @@ const {
 class TableList extends Component {
   
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       contractList : [],
       currentPage : 1,
       contractCount : 0
-    };
+    }
   }
 
 
   async componentDidMount () {
 
-    this.fetchData(this.state.currentPage);
-    //await this.props.getChannels()
+    this.fetchData(this.state.currentPage)
     const currentChannel = cookie.load("changechain")
     await this.props.getcontractList(currentChannel,10,0)
     await this.props.getdashStats(currentChannel)
     this.setState({
       contractCount : this.props.dashStats.contractCount
-    });
-   setInterval(() => this.syncData(currentChannel), 5000);
+    })
+   setInterval(() => this.syncData(currentChannel), 5000)
   }
 
   async syncData(currentChannel) {
     await Promise.all([
       this.props.getcontractList(currentChannel,10,0),
-     // this.props.getChannels(),
       this.props.getdashStats(currentChannel)
     ])
-    this.setState({currentPage : 1})
+    this.state.currentPage = 1
    
   }
 
@@ -81,13 +77,13 @@ class TableList extends Component {
 
   fetchData = async(currentPage) => {
     await this.props.getcontractList(cookie.load("changechain"),10, currentPage-1)
-  };
+  }
 
 
   changePage = (currentPage) => {
     this.setState({currentPage : currentPage})
-    this.fetchData(currentPage);
-  };
+    this.fetchData(currentPage)
+  }
 
   render() {
     const columnHeaders = []
@@ -115,7 +111,7 @@ class TableList extends Component {
             />}
             dataIndex="channelName"
             width={200} />
-        ); break;
+        ); break
 
         case "path" : columnHeaders.push(
           <Table.Column key = {config.contract[i]} title={<FormattedMessage
@@ -125,7 +121,7 @@ class TableList extends Component {
             />}
             dataIndex="path"
             width={200} />
-        ); break;
+        ); break
         case "transactions_count" : columnHeaders.push(
           <Table.Column key = {config.contract[i]} title={<FormattedMessage
             id="page.localeProvider.txcount"
@@ -134,7 +130,7 @@ class TableList extends Component {
             />}
             dataIndex="txCount"
             width={100} />
-        ); break;
+        ); break
 
         case "version" : columnHeaders.push(
             <Table.Column key = {config.contract[i]} title={<FormattedMessage
@@ -145,7 +141,7 @@ class TableList extends Component {
             dataIndex="version"
             width={100} />
               
-        ); break;
+        ); break
 
         case "name" : columnHeaders.push(
            <Table.Column key = {config.contract[i]} title={<FormattedMessage
@@ -164,7 +160,7 @@ class TableList extends Component {
             )}
             width={200} />
          
-        ); break;
+        ); break
 
         case "balance" : columnHeaders.push(
           <Table.Column key = {config.contract[i]} title={<FormattedMessage
@@ -174,7 +170,7 @@ class TableList extends Component {
             />}
             dataIndex="balance"
             width={100} />
-        ); break;
+        ); break
 
         case "txcount" : columnHeaders.push(
           <Table.Column key = {config.contract[i]} title={<FormattedMessage
@@ -184,7 +180,7 @@ class TableList extends Component {
             />}
             dataIndex="txcount"
             width={100} />
-        ); break;
+        ); break
 
         case "creator" : columnHeaders.push(
           <Table.Column key = {config.contract[i]} title={<FormattedMessage
@@ -202,7 +198,7 @@ class TableList extends Component {
               </span>
             )}
             width={200} />
-        ); break;
+        ); break
 
         case "creator_hash" : columnHeaders.push(
           <Table.Column key = {config.contract[i]} title={<FormattedMessage
@@ -220,7 +216,7 @@ class TableList extends Component {
               </span>
             )}
             width={200} />
-        ); break;
+        ); break
 
         case "contract_code" : columnHeaders.push(
           <Table.Column key = {config.contract[i]} title={<FormattedMessage
@@ -230,10 +226,10 @@ class TableList extends Component {
             />}
             dataIndex="contract_code"
             width={200} />
-        ); break;
+        ); break
 
 
-        default : break;
+        default : break
 
         }
     }
@@ -269,14 +265,13 @@ class TableList extends Component {
           </Row>
         </Grid>
       </div>
-    );
+    )
   }
 }
 
 export default compose(
   connect(
     state => ({
-      currentChannel: currentChannelSelector(state),
       channels : channelsSelector(state),
       contractList : contractListSelector(state),
       dashStats : dashStatsSelector(state),
@@ -284,8 +279,7 @@ export default compose(
     }),
     {
       getcontractList: contractList,
-      //getChannels : channels,
       getdashStats : dashStats
     }
   )
-)(TableList);
+)(TableList)

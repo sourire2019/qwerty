@@ -15,7 +15,6 @@ import {tableOperations, tableSelectors} from "state/redux/tables/";
 
 const {
   channelsSelector, 
-  currentChannelSelector, 
   dashStatsSelector, 
   transactionPerMinSelector, 
   blockPerMinSelector,
@@ -26,7 +25,6 @@ const {
 const {
   transactionPerMin, 
   blockPerMin, 
-  channels, 
   dashStats, 
   transactionPerHour,
   blockPerHour
@@ -412,7 +410,6 @@ class Dashboard extends Component {
 export default compose(
   connect(
     state => ({
-      currentChannel : currentChannelSelector(state),
       channels : channelsSelector(state),
       dashStats : dashStatsSelector(state),
       transactionPerMin : transactionPerMinSelector(state),

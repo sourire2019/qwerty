@@ -23,7 +23,7 @@ import Block from './Block';
 import cookie from 'react-cookies';
 
 const {blockList, transaction, dashStats } = tableOperations;
-const {channelsSelector, blockListSelector, transactionSelector, currentChannelSelector, dashStatsSelector } = tableSelectors
+const {blockListSelector, transactionSelector,  dashStatsSelector } = tableSelectors
 
 
 
@@ -44,8 +44,6 @@ class TableList extends Component {
 
     this.fetchData(this.state.currentPage);
 
-    let arr = [];
-    let selectedValue ={}
     const currentChannel = cookie.load("changechain")
     await this.props.getblockList(currentChannel, 10, 0)
     await this.props.getTransaction(currentChannel) 
@@ -59,7 +57,7 @@ class TableList extends Component {
       this.props.getblockList(currentChannel,10,0),
       this.props.getdashStats(currentChannel)
     ])
-    this.setState({currentPage : 1}) 
+    this.state.currentPage = 1
   }
 
   componentWillReceiveProps(nextProps) {
@@ -288,7 +286,6 @@ class TableList extends Component {
 export default compose(
   connect(
     state => ({
-      currentChannel: currentChannelSelector(state),
       blockList : blockListSelector(state),
       dashStats : dashStatsSelector(state),
       transaction: transactionSelector(state)

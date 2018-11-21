@@ -54,7 +54,8 @@ class TableList extends Component {
     await Promise.all([
       this.props.getChannels(),
     ])
-    this.setState({currentPage : 1})
+
+    this.state.currentPage = 1
    
   }
 
