@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import cookie from 'react-cookies';
 
-
 function getLocale(lang) {
   let result = {};
   switch (lang) {
@@ -21,10 +20,10 @@ function getLocale(lang) {
 }
 
 class Main extends Component {
- 	constructor(props) {
-	    super(props);
-	    this.state = {};
-  	}
+  constructor(props) {
+      super(props);
+      this.state = {};
+    }
   render() {
 
     const appLocale = getLocale(cookie.load("language"));
@@ -32,14 +31,14 @@ class Main extends Component {
 
     
     return (
-    	<IntlProvider
+      <IntlProvider
           locale={appLocale.locale}
           messages={appLocale.messages}
           formats={appLocale.formats}
         >
-      	<TableList />
-	    	
-    	</IntlProvider>
+        <TableList />
+        
+      </IntlProvider>
     );
   }
 }

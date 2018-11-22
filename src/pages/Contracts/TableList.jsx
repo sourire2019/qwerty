@@ -12,7 +12,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import './main.css'
 
 import Pagination from "react-js-pagination"
-import"bootstrap/less/bootstrap.less"
+//import"bootstrap/less/bootstrap.less"
 import {tableOperations, tableSelectors} from "state/redux/tables/"
 
 import compose from "recompose/compose"

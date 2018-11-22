@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import IceContainer from '@icedesign/container';
 import { UnControlled as CodeMirror } from 'react-codemirror2';
-import { Grid } from '@icedesign/base';
+import { Grid, Row, Col } from 'react-bootstrap';
 import 'codemirror/lib/codemirror.css';
 
 import cookie from 'react-cookies';
@@ -13,8 +13,6 @@ import {connect} from "react-redux"
 import {tableOperations, tableSelectors} from "state/redux/tables/"
 
 require('codemirror/mode/javascript/javascript');
-
-const { Row, Col } = Grid;
 
 
 
