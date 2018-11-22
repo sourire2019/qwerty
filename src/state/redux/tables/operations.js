@@ -864,7 +864,7 @@ export default {
 // })
 
 // mock.onGet('/api/watchcontract').reply(200,{
-//     "row" : "bnfedjkuvbcrilfkds &nbsp; jmencvo;anikbhgvyiktrfhegjmsicflojhneriolghnvbndcnvyu <br/> jhkregyhirehsoledcfjhowcnhvlajdoqujedopw3yhtfiejslaodx;ujuowl"
+//     "row" : "123 <br /> doc //n <br /> cjuyd"
 // })
 
 // mock.onPost('/api/uploadContract').reply(200,{
@@ -1056,6 +1056,7 @@ export default {
 // }
 
 // const uploadContract = (channel, id, value) => dispatch => {
+//     console.log(12345, value)
 //     return axios.post(`/api/uploadContract`)
 //     .then(resp => {
 //         dispatch(actions.getUploadContract(resp.data))

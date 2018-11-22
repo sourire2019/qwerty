@@ -64,7 +64,13 @@ export  class Upload extends Component {
   };
 
   submint =async() =>{
-    await this.props.getuploadContract(cookie.load("changechain"), this.props.id, this.state.value)
+    let value = '';
+    if(this.state.value.indexOf('\n') !=-1) {
+       value=this.state.value.replace(/\n/g,"<br />");
+    }else{
+      value = this.state.value
+    }
+    await this.props.getuploadContract(cookie.load("changechain"), this.props.id, value)
     if (this.props.uploadContract.message == "success") {
       alert("上传成功")
       this.props.close()
@@ -84,8 +90,10 @@ export  class Upload extends Component {
           </Col>
         </Row>
         <Row>
-          <button onClick = {() => this.submint()}>确认</button>
-          <button onClick = {() => this.close()}> 取消</button>
+          <div className = "button">
+            <button onClick = {() => this.submint()}>确认</button>
+            <button onClick = {() => this.close()}> 取消</button>
+          </div>
         </Row>
         <Dialog ref={(el) => { this.dialog = el }} />
       </IceContainer>

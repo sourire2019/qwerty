@@ -18,10 +18,16 @@ export default class See extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
+      value: props.watchContract.replace(/<br \/>/g,"\n"),
     };
   }
-
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.watchContract != undefined){
+      this.setState({
+        value : nextProps.watchContract.replace(/<br \/>/g,"\n")
+      })
+    }
+  }
   onChange = (editor, data, value) => {
     this.setState({
       value,
@@ -37,9 +43,8 @@ export default class See extends Component {
 
     return (
       <CodeMirror
-        value={this.props.watchContract}
+        value={this.state.value}
         options={options}
-        onChange={this.onChange}
       />
     );
   };
