@@ -66,7 +66,7 @@ export  class Upload extends Component {
   submint =async() =>{
     let value = '';
     if(this.state.value.indexOf('\n') !=-1) {
-       value=this.state.value.replace(/\n/g,"<br />");
+       value=this.state.value.replace(/\n/g,"<br>");
     }else{
       value = this.state.value
     }

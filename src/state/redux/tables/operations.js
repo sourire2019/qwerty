@@ -225,7 +225,7 @@ const watchContract = (channel, id) => dispatch => {
 const uploadContract = (channel, id, value) => dispatch => {
     return post(`/api/uploadContract/${channel}/${id}/${value}`)
     .then(resp => {
-        dispatch(actions.getUploadContract(resp))
+      dispatch(actions.getUploadContract(resp))
     })
     .catch(error => {
       console.error(error)

@@ -18,13 +18,13 @@ export default class See extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: props.watchContract.replace(/<br \/>/g,"\n"),
+      value: props.watchContract.replace(/<br>/g,"\n"),
     };
   }
   componentWillReceiveProps(nextProps) {
     if(nextProps.watchContract != undefined){
       this.setState({
-        value : nextProps.watchContract.replace(/<br \/>/g,"\n")
+        value : nextProps.watchContract.replace(/<br>/g,"\n")
       })
     }
   }
