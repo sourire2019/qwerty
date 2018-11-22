@@ -1,6 +1,6 @@
 import actions from './actions'
 import moment from 'moment-timezone'
-import { get } from 'services/request.js'
+import { get, post } from 'services/request.js'
 
 import axios from 'axios'
 var MockAdapter = require('axios-mock-adapter');
@@ -213,9 +213,9 @@ const blockList = (channel, limit, num) => (dispatch) => {
 }
 
 const watchContract = (channel, id) => dispatch => {
-    return axios.get(`/api/watchcontract/${channel}/${id}`)
+    return get(`/api/watchcontract/${channel}/${id}`)
     .then(resp => {
-        dispatch(actions.getWatchContract(resp.data))
+        dispatch(actions.getWatchContract(resp))
     })
     .catch(error => {
       console.error(error)
@@ -223,9 +223,9 @@ const watchContract = (channel, id) => dispatch => {
 }
 
 const uploadContract = (channel, id, value) => dispatch => {
-    return axios.post(`/api/uploadContract/${channel}/${id}/${value}`)
+    return post(`/api/uploadContract/${channel}/${id}/${value}`)
     .then(resp => {
-        dispatch(actions.getUploadContract(resp.data))
+        dispatch(actions.getUploadContract(resp))
     })
     .catch(error => {
       console.error(error)

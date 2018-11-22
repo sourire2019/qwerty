@@ -12,7 +12,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import './main.css'
 
 import Pagination from "react-js-pagination"
-//import"bootstrap/less/bootstrap.less"
+import"bootstrap/less/bootstrap.less"
 import {tableOperations, tableSelectors} from "state/redux/tables/"
 
 import compose from "recompose/compose"
@@ -289,13 +289,13 @@ class TableList extends Component {
             />}
             dataIndex = "id"
               cell= {row => (<span>
-                  <span onClick ={() => this.addContract()}>
+                  <span onClick ={() => this.addContract(row)}>
                   <FormattedMessage
                     id='page.localeProvider.upload'
                     defaultMessage='Upload'
                     description='Upload'
                   /></span>/
-                  <span onClick ={() => this.seeContract()}>
+                  <span onClick ={() => this.seeContract(row)}>
                   <FormattedMessage
                     id='page.localeProvider.see'
                     defaultMessage='See'
