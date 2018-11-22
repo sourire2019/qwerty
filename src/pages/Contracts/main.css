@@ -22,15 +22,16 @@
 	float: right;
 }
 
-/*button {
+button {
 	margin-top: 20px;
 	margin-right: 10px;
 	border : none;
-	background: blue;
-	color: white;
+	background: #337ab7;
+	color: #fff;
+	padding: 5px 10px 5px 10px;
+	text-align: center;
 }
 
 .button {
-	float: right;
-	
-}*/
+	float: right;	
+}

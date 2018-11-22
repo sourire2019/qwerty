@@ -61,7 +61,9 @@ export default class See extends Component {
           </Col>
         </Row>
         <Row>
-          <button onClick = {() => this.close()}> 取消</button>
+          <div className = "button">
+            <button onClick = {() => this.close()}> 取消</button>
+          </div>
         </Row>
       </IceContainer>
     );

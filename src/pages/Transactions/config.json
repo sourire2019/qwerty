@@ -3,6 +3,6 @@
 		"chainname", "txid", "type", "contract" , "txhash", "block" ,"from", "to", "timestamp"
 	],
 	"transactiondetails" : [
-		"transactionid" , "contractnsme", "type", "time"
+		"transactionid" , "chainname", "contractname", "block" ,"from", "to" ,"type", "time"
 	]
 }

@@ -41,6 +41,113 @@ export class TransactionDetail extends Component {
             </td>
           </tr>
         );break;
+        case 'chainname' : transactionview.push(
+          <tr key = {config.transactiondetails[i]}>
+            <th>
+              <FormattedMessage
+              id='page.localeProvider.chainname'
+              defaultMessage='Chain Name'
+              description='Chain Name'
+            />
+              :
+            </th>
+            <td>
+              {this.props.transaction.channelname}
+            </td>
+          </tr>
+        );break;
+        case 'contractname' : transactionview.push(
+          <tr key = {config.transactiondetails[i]}>
+            <th>
+              <FormattedMessage
+                id="page.localeProvider.contractname"
+                defaultMessage="Contract Name"
+                description="Contract Name"
+              />
+              :
+            </th>
+            <td>
+              {this.props.transaction.contractname}
+            </td>
+          </tr>
+        );break;
+        case 'block'  : transactionview.push(
+          <tr key = {config.transactiondetails[i]}>
+            <th>
+              <FormattedMessage
+                id='page.localeProvider.blockid'
+                defaultMessage='blockid'
+                description='blockid'
+              />
+              :
+            </th>
+            <td>
+              {this.props.transaction.blockid}
+            </td>
+          </tr>
+        );break;
+        case 'from' : transactionview.push(
+          <tr key = {config.transactiondetails[i]}>
+            <th>
+              <FormattedMessage
+                id='page.localeProvider.from'
+                defaultMessage='from'
+                description='from'
+              />
+              :
+            </th>
+            <td>
+              {this.props.transaction.from}
+            </td>
+          </tr>
+        );break;
+        case 'to'  : transactionview.push(
+          <tr key = {config.transactiondetails[i]}>
+            <th>
+              <FormattedMessage
+                id='page.localeProvider.to'
+                defaultMessage='to'
+                description='to'
+              />
+              :
+            </th>
+            <td>
+              {this.props.transaction.to}
+            </td>
+          </tr>
+        );break;
+        case 'type' : transactionview.push(
+          <tr key = {config.transactiondetails[i]}>
+            <th>
+              <FormattedMessage
+                id="page.localeProvider.type"
+                defaultMessage="Type"
+                description="Type"
+              />
+              :
+            </th>
+            <td>
+              {this.props.transaction.type}
+            </td>
+          </tr>
+        );break;
+        case "time" : transactionview.push(
+          <tr key = {config.transactiondetails[i]}>
+            <th>
+              <FormattedMessage
+                id="page.localeProvider.time"
+                defaultMessage="Time"
+                description="Time"
+              />
+              :
+            </th>
+            <td>
+              {moment(this.props.transaction.createdt)
+                .tz(moment.tz.guess())
+                .format("M-D-YYYY h:mm A zz")}
+            </td>
+          </tr>
+        );break;
         case "validationcode" : transactionview.push(
           <tr key = {config.transactiondetails[i]}>
             <th>
@@ -91,49 +198,6 @@ export class TransactionDetail extends Component {
               :
             </th>
             <td>{this.props.transaction.endorser_msp_id}</td>
-          </tr>
-        );break;
-        case "contractnsme" : transactionview.push(
-          <tr key = {config.transactiondetails[i]}>
-            <th>
-              <FormattedMessage
-                id="page.localeProvider.contractname"
-                defaultMessage="Contract Name"
-                description="Contract Name"
-              />
-              :
-            </th>
-            <td>{this.props.transaction.contractname}</td>
-          </tr>
-        );break;
-        case "type" : transactionview.push(
-          <tr key = {config.transactiondetails[i]}>
-            <th>
-              <FormattedMessage
-                id="page.localeProvider.type"
-                defaultMessage="Type"
-                description="Type"
-              />
-              :
-            </th>
-            <td>{this.props.transaction.type}</td>
-          </tr>
-        );break;
-        case "time" : transactionview.push(
-          <tr key = {config.transactiondetails[i]}>
-            <th>
-              <FormattedMessage
-                id="page.localeProvider.time"
-                defaultMessage="Time"
-                description="Time"
-              />
-              :
-            </th>
-            <td>
-              {moment(this.props.transaction.createdt)
-                .tz(moment.tz.guess())
-                .format("M-D-YYYY h:mm A zz")}
-            </td>
           </tr>
         );break;
         default: transactionview.push(null); break;
