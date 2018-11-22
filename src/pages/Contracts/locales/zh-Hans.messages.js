@@ -11,5 +11,7 @@ export default {
   'page.localeProvider.contract_code': '合约代码',
   'page.localeProvider.operation' : '操作',
   'page.localeProvider.upload' : '上传',
-  'page.localeProvider.see' : '查看'
+  'page.localeProvider.see' : '查看',
+  'page.localeProvider.close' : '关闭',
+  'page.localeProvider.submit' : '提交'
 }

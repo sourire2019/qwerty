@@ -9,7 +9,7 @@ import Dialog from 'react-bootstrap-dialog';
 
 import compose from "recompose/compose"
 import {connect} from "react-redux"
-
+import { FormattedMessage } from 'react-intl';
 import {tableOperations, tableSelectors} from "state/redux/tables/"
 
 require('codemirror/mode/javascript/javascript');
@@ -91,8 +91,20 @@ export  class Upload extends Component {
         </Row>
         <Row>
           <div className = "button">
-            <button onClick = {() => this.submint()}>确认</button>
-            <button onClick = {() => this.close()}> 取消</button>
+            <button className="cliockbutton" onClick = {() => this.submint()}>
+               <FormattedMessage
+                id="page.localeProvider.submit"
+                defaultMessage='Submit'
+                description='Submit'
+              />
+            </button>
+            <button className="cliockbutton" onClick = {() => this.close()}> 
+               <FormattedMessage
+                id="page.localeProvider.close"
+                defaultMessage='Close'
+                description='Close'
+              />
+            </button>
           </div>
         </Row>
         <Dialog ref={(el) => { this.dialog = el }} />

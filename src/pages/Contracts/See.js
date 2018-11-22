@@ -3,6 +3,7 @@ import IceContainer from '@icedesign/container';
 import { UnControlled as CodeMirror } from 'react-codemirror2';
 import { Grid, Row, Col } from 'react-bootstrap';
 import 'codemirror/lib/codemirror.css';
+import { FormattedMessage } from 'react-intl';
 
 require('codemirror/mode/javascript/javascript');
 
@@ -18,7 +19,7 @@ export default class See extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: props.watchContract.replace(/<br>/g,"\n"),
+      value: props.watchContract ==null? ('') : ( props.watchContract.replace(/<br>/g,"\n")),
     };
   }
   componentWillReceiveProps(nextProps) {
@@ -62,7 +63,13 @@ export default class See extends Component {
         </Row>
         <Row>
           <div className = "button">
-            <button onClick = {() => this.close()}> 取消</button>
+            <button className = "cliockbutton" onClick = {() => this.close()}> 
+              <FormattedMessage
+                id="page.localeProvider.close"
+                defaultMessage='Close'
+                description='Close'
+              />
+            </button>
           </div>
         </Row>
       </IceContainer>
