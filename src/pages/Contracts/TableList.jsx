@@ -19,17 +19,26 @@ import compose from "recompose/compose"
 import {connect} from "react-redux"
 
 import cookie from 'react-cookies'
-import { Button} from 'reactstrap';
+
+import Upload from './Upload';
+import See from './See';
+import Dialog from 'react-bootstrap-dialog';
 
 const {
   contractList,
-  dashStats
+  dashStats,
+  watchContract,
+  uploadContract
+
 } = tableOperations
 
 const {
   channelsSelector, 
   contractListSelector, 
-  dashStatsSelector
+  dashStatsSelector,
+  watchContractSelector,
+  uploadContractSelector
+
 } = tableSelectors
 
 
@@ -51,6 +60,7 @@ class TableList extends Component {
     const currentChannel = cookie.load("changechain")
     await this.props.getcontractList(currentChannel,10,0)
     await this.props.getdashStats(currentChannel)
+
     this.setState({
       contractCount : this.props.dashStats.contractCount
     })
@@ -87,8 +97,44 @@ class TableList extends Component {
     this.setState({currentPage : currentPage})
     this.fetchData(currentPage)
   }
-  addContract = () => {
-    alert("add Contract")
+  addContract = (id) => {
+
+    this.dialog.show({
+      title : <FormattedMessage
+                id='page.localeProvider.upload'
+                defaultMessage='Upload'
+                description='Upload'
+              />,
+      body : <Upload  
+        close = {() => this.dialog.onHide()} 
+        uploadContract = {this.props.uploadContract}
+        id = {id}
+        getuploadContract = {this.props.getuploadContract}
+      />,
+      bsSize : 'large',
+      onHide: (dialog) => {
+        dialog.hide()
+      }
+    })
+  }
+
+  seeContract = async(id) => {
+    await this.props.getwatchContract(cookie.load("changechain"), id)
+
+    this.dialog.show({
+      title : <FormattedMessage
+                id='page.localeProvider.see'
+                defaultMessage='See'
+                description='See'
+              />,
+      body : <See  close = {() =>  
+        this.dialog.onHide()
+      } watchContract = {this.props.watchContract}/>,
+      bsSize : 'large',
+      onHide: (dialog) => {
+        dialog.hide()
+      }
+    })
   }
 
   render() {
@@ -234,6 +280,33 @@ class TableList extends Component {
             width={200} />
         ); break
 
+        case 'operation' : columnHeaders.push(
+          <Table.Column key = {config.contract[i]} title={
+              <FormattedMessage
+              id='page.localeProvider.operation'
+              defaultMessage='Operation'
+              description='Operation'
+            />}
+            dataIndex = "id"
+              cell= {row => (<span>
+                  <span onClick ={() => this.addContract()}>
+                  <FormattedMessage
+                    id='page.localeProvider.upload'
+                    defaultMessage='Upload'
+                    description='Upload'
+                  /></span>/
+                  <span onClick ={() => this.seeContract()}>
+                  <FormattedMessage
+                    id='page.localeProvider.see'
+                    defaultMessage='See'
+                    description='See'
+                  />
+                </span>
+                  
+
+              </span>)}
+              width={200} />
+          );break
 
         default : break
 
@@ -247,13 +320,6 @@ class TableList extends Component {
               <Card
                 ctTableFullWidth
                 ctTableResponsive
-                title = {
-                  <Row className="align-items-center mt-3">
-                    <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0" style = {{float : "right"}}>
-                      <Button active block color="primary" aria-pressed="true" onClick ={() => this.addContract()}>Add Contract</Button>
-                    </Col>
-                  </Row>
-                }
                 content={
                   <div >
                     <Table
@@ -277,6 +343,7 @@ class TableList extends Component {
 
           </Row>
         </Grid>
+        <Dialog ref={(el) => { this.dialog = el }} />
       </div>
     )
   }
@@ -288,11 +355,14 @@ export default compose(
       channels : channelsSelector(state),
       contractList : contractListSelector(state),
       dashStats : dashStatsSelector(state),
-      state: state
+      watchContract : watchContractSelector(state),
+      uploadContract : uploadContractSelector(state)
     }),
     {
       getcontractList: contractList,
-      getdashStats : dashStats
+      getdashStats : dashStats,
+      getwatchContract : watchContract,
+      getuploadContract : uploadContract
     }
   )
 )(TableList)

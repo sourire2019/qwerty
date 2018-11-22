@@ -8,5 +8,8 @@ export default {
   'page.localeProvider.name': 'Name',
   'page.localeProvider.balance': 'Balance',
   'page.localeProvider.creator_hash': 'Creator Hash',
-  'page.localeProvider.contract_code': 'Contract Code'
+  'page.localeProvider.contract_code': 'Contract Code',
+  'page.localeProvider.operation' : 'Operation',
+  'page.localeProvider.upload' : 'Upload',
+  'page.localeProvider.see' : 'See'
 }

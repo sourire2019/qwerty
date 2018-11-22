@@ -238,6 +238,36 @@ const transactionPerMinReducer = (state = initialState, action) => {
   }
 }
 
+const watchContractReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case types.WATCH_CONTRACT: {
+      return ({
+        row : action.payload.watchContract.row,
+        loaded: true,
+        errors: action.errors
+      })
+    }
+    default: {
+      return state
+    }
+  }
+}
+
+const uploadContractReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case types.UPLOAD_CONTRACT: {
+      return ({
+        row : action.payload.uploadContract,
+        loaded: true,
+        errors: action.errors
+      })
+    }
+    default: {
+      return state
+    }
+  }
+}
+
 const reducer = combineReducers({
   blockList: blockListReducer,
   contractList: contractListReducer,
@@ -254,7 +284,9 @@ const reducer = combineReducers({
   nodeStatus: nodeStatusReducer,
   transactionByOrg: transactionByOrgReducer,
   transactionPerHour: transactionPerHourReducer,
-  transactionPerMin: transactionPerMinReducer
+  transactionPerMin: transactionPerMinReducer,
+  watchContract : watchContractReducer,
+  uploadContract : uploadContractReducer
 })
 
 export default reducer

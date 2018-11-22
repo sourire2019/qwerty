@@ -8,5 +8,8 @@ export default {
   'page.localeProvider.name': '合约地址',
   'page.localeProvider.balance': '余额',
   'page.localeProvider.creator_hash': '合约来源',
-  'page.localeProvider.contract_code': '合约代码'
+  'page.localeProvider.contract_code': '合约代码',
+  'page.localeProvider.operation' : '操作',
+  'page.localeProvider.upload' : '上传',
+  'page.localeProvider.see' : '查看'
 }

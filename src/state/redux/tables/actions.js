@@ -84,6 +84,17 @@ const updateChannel = (channel) => ({
   type: types.CHANGE_CHANNEL,
   payload: { channel }
 })
+
+const getWatchContract = (watchContract) => ({
+  type: types.WATCH_CONTRACT,
+  payload : { watchContract } 
+})
+
+const getUploadContract = (uploadContract) =>({
+  type : types.UPLOAD_CONTRACT,
+  payload : {uploadContract}
+})
+
 export default {
   getBlockList,
   getContractList,
@@ -101,5 +112,7 @@ export default {
   getTransactionByOrg,
   getTransactionPerHour,
   getTransactionPerMin,
-  updateChannel
+  updateChannel,
+  getWatchContract,
+  getUploadContract
 }
