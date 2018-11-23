@@ -10,7 +10,7 @@ export default {
   'page.localeProvider.id': '编号',
   'page.localeProvider.create': '创建于',
   'page.localeProvider.txnum': '交易数量',
-  'page.localeProvider.prehash': '以前的哈希',
+  'page.localeProvider.prehash': '上一个哈希',
   'page.localeProvider.txdetails': '交易明细',
   'page.localeProvider.transactionid': '交易编号',
   'page.localeProvider.valcode': '验证码',

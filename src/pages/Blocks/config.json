@@ -6,6 +6,6 @@
 		"chainname", "id", "blocknumber", "createat", "number_of_transactions", "blockhash", "datahash", "prehash"
 	],
 	"transactiondetails" : [
-		"transactionid" , "contractnsme", "type", "time"
+		"transactionid" , "chainname", "contractname", "block" ,"from", "to" ,"type", "time"
 	]
 }
