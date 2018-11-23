@@ -292,20 +292,20 @@ class TableList extends Component {
               cell= { (row, index) =>(
                 <span>
                   {row == null || row == '' ? (
-                  <span onClick ={this.addContract.bind(this,row, index)}>
+                  <a><span onClick ={this.addContract.bind(this,row, index)}>
                     <FormattedMessage
                       id='page.localeProvider.upload'
                       defaultMessage='Upload'
                       description='Upload'
                     />
-                  </span>) : (
-                  <span onClick ={this.seeContract.bind(this,row, index)}>
+                  </span></a>) : (
+                  <a href = "#/contracts"><span onClick ={this.seeContract.bind(this,row, index)}>
                     <FormattedMessage
                       id='page.localeProvider.see'
                       defaultMessage='See'
                       description='See'
                     />
-                  </span>)}
+                  </span></a>)}
                 </span>
             )}
 

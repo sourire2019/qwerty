@@ -167,6 +167,11 @@ class TableList extends Component {
               description='Type'
             />}
               dataIndex="type"
+              cell= { row =>(        
+                <span>          
+                  {!row ==0 ? ("transaction") : ("contract")}
+                </span>
+                )}
               width={60} />
         );break
 

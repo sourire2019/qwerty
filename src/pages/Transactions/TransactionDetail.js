@@ -127,7 +127,7 @@ export class TransactionDetail extends Component {
               :
             </th>
             <td>
-              {this.props.transaction.type}
+              {this.props.transaction.type ==0 ? ("transaction") : ("contract")}
             </td>
           </tr>
         );break;

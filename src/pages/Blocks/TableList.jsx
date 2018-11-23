@@ -112,7 +112,6 @@ class TableList extends Component {
             transactionsdata={data}
             getTransaction = {this.props.getTransaction}
           />,
-      bsSize: 'medium',
       /*actions: [
         Dialog.CancelAction(),
         Dialog.OKAction()
@@ -219,25 +218,27 @@ class TableList extends Component {
             dataIndex="txhash"
             cell= { row =>(
               <span>
-                <button
-                  className="partialHash"
-                  onClick={() => this.handleDialogOpenTransactions(row)}
-                  disabled= {row ? "" : "true"}
-                  href="#/blocks"
-                >
-                  <div className="fullHash" id="showTransactionId">
-                    <FormattedMessage
-                    id="page.localeProvider.details"
-                    defaultMessage="Details"
-                    description="Details"
-                    />
-                  </div>{" "}
-                    <FormattedMessage
-                    id="page.localeProvider.details"
-                    defaultMessage="Details"
-                    description="Details"
-                    />
-                </button>{" "}
+                <a href = "#/blocks">
+                  <button
+                    className="partialHash"
+                    onClick={() => this.handleDialogOpenTransactions(row)}
+                    disabled= {row ? "" : "true"}
+                    href="#/blocks"
+                  >
+                    <div className="fullHash" id="showTransactionId">
+                      <FormattedMessage
+                      id="page.localeProvider.details"
+                      defaultMessage="Details"
+                      description="Details"
+                      />
+                    </div>{" "}
+                      <FormattedMessage
+                      id="page.localeProvider.details"
+                      defaultMessage="Details"
+                      description="Details"
+                      />
+                  </button>{" "}
+                </a>
               </span>
             )}
             width={100} />

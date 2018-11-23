@@ -65,8 +65,9 @@ class Transaction extends Component {
               className="partialHash"
               href="#/blocks"
               onClick={() => this.handleDialogOpen(row)}
+              style = {{textAlign : 'left'}}
             >
-              {row}
+              {!row ? "" : (row.length>=18?(row.slice(0, 18) +"....") : (row))}
             </a>{" "}
           </span>
         )}
