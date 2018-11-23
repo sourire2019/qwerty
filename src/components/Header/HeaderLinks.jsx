@@ -6,6 +6,8 @@ import compose from "recompose/compose";
 import {connect} from "react-redux";
 import {tableOperations, tableSelectors} from "state/redux/tables/";
 
+
+
 const {
   channelsSelector, 
   currentChannelSelector
@@ -55,6 +57,7 @@ class HeaderLinks extends Component {
         value: element.genesis_block_hash,
         label: element.channelname
       });
+
       Menu.push (
         <MenuItem key={element.genesis_block_hash} onClick = {() => {this.handleChange(element.genesis_block_hash)}}>{element.channelname}</MenuItem>
       )
@@ -144,7 +147,6 @@ class HeaderLinks extends Component {
       <div>
         <i className="fa fa-globe" />
         <b className="caret" />
-        <span className="notification">{this.state.channels.length}</span>
         <p className="hidden-lg hidden-md">ChangeChains</p>
       </div>
     );

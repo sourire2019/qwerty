@@ -4,6 +4,26 @@ import { Navbar } from 'react-bootstrap';
 import HeaderLinks from './HeaderLinks';
 import routerConfig from '../../routerConfig';
 
+import { IntlProvider, addLocaleData ,FormattedMessage} from 'react-intl';
+import cookie from 'react-cookies';
+
+function getLocale(lang) {
+  let result = {};
+  switch (lang) {
+    case 'zh-CN':
+      result = require('./locales/zh-Hans');
+      break;
+    case 'en-US':
+      result = require('./locales/en-US');
+      break;
+    default:
+      result = require('./locales/en-US');
+  }
+
+  return result.default || result;
+}
+
+
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -51,15 +71,66 @@ class Header extends Component {
       }
       return null;
     });
-    return name;
+    let pathname;
+    switch(name) {
+      case "Dashboard" : pathname = 
+        <FormattedMessage
+          id="page.localeProvider.dashboard"
+          defaultMessage="Dashboard"
+          description="Dashboard"
+        />;break;
+      case "Nodes" : pathname = 
+        <FormattedMessage
+          id="page.localeProvider.nodes"
+          defaultMessage="Nodes"
+          description="Nodes"
+        />;break;
+        case "Blocks" : pathname = 
+        <FormattedMessage
+          id="page.localeProvider.blocks"
+          defaultMessage="Blocks"
+          description="Blocks"
+        />;break;
+        case "Chains" : pathname = 
+        <FormattedMessage
+          id="page.localeProvider.chains"
+          defaultMessage="Chains"
+          description="Chains"
+        />;break;
+        case "Contracts" : pathname = 
+        <FormattedMessage
+          id="page.localeProvider.contracts"
+          defaultMessage="Contracts"
+          description="Contracts"
+        />;break;
+        case "Transactions" : pathname = 
+        <FormattedMessage
+          id="page.localeProvider.transactions"
+          defaultMessage="Transactions"
+          description="Transactions"
+        />;break;
+      default : break;
+
+
+    }
+
+    return pathname;
   }
   render() {
+    const appLocale = getLocale(cookie.load("language"));
+    addLocaleData(...appLocale.data);
     return (
       <Navbar fluid>
         <Navbar.Header>
-          <Navbar.Brand>
-            <a href="#pablo">{this.getBrand()}</a>
-          </Navbar.Brand>
+          <IntlProvider
+            locale={appLocale.locale}
+            messages={appLocale.messages}
+            formats={appLocale.formats}
+          >
+            <Navbar.Brand>
+              <a href="#pablo">{this.getBrand()}</a>
+            </Navbar.Brand>
+          </IntlProvider>
           <Navbar.Toggle onClick={this.mobileSidebarToggle} />
         </Navbar.Header>
         <Navbar.Collapse>
