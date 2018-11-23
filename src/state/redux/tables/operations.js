@@ -223,7 +223,13 @@ const watchContract = (channel, id) => dispatch => {
 }
 
 const uploadContract = (channel, id, value) => dispatch => {
-    return post(`/api/uploadContract/${channel}/${id}/${value}`)
+    let contractvalue = {
+      value : value
+    }
+
+    return post(`/api/uploadContract/${channel}/${id}`,{
+      data : value
+    })
     .then(resp => {
       dispatch(actions.getUploadContract(resp))
     })
