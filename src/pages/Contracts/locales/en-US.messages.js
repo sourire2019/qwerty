@@ -11,7 +11,7 @@ export default {
   'page.localeProvider.contract_code': 'Contract Code',
   'page.localeProvider.operation' : 'Operation',
   'page.localeProvider.upload' : 'Upload',
-  'page.localeProvider.see' : 'See',
+  'page.localeProvider.see' : 'View',
   'page.localeProvider.close' : 'Close',
    'page.localeProvider.submit' : 'Submit'
 }

@@ -61,17 +61,6 @@ export default class See extends Component {
             {this.renderCodeMirror()}
           </Col>
         </Row>
-        <Row>
-          <div className = "button">
-            <button className = "cliockbutton" onClick = {() => this.close()}> 
-              <FormattedMessage
-                id="page.localeProvider.close"
-                defaultMessage='Close'
-                description='Close'
-              />
-            </button>
-          </div>
-        </Row>
       </IceContainer>
     );
   }
