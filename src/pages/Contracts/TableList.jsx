@@ -291,7 +291,7 @@ class TableList extends Component {
             dataIndex = "srecode"
               cell= { (row, index) =>(
                 <span>
-                  {row == null ? (
+                  {row == null || row == '' ? (
                   <span onClick ={this.addContract.bind(this,row, index)}>
                     <FormattedMessage
                       id='page.localeProvider.upload'
