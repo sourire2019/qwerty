@@ -74,6 +74,7 @@ export  class Upload extends Component {
     if (this.props.uploadContract.message == "success") {
       alert("上传成功")
       this.props.close()
+      window.location.reload()
     }else {
       alert("上传失败")
     }
