@@ -42,7 +42,7 @@ class Transaction extends Component {
                 description="Transaction Details"
               />,
       body: <TransactionDetail
-            transaction={this.props.transactions}
+            transaction={this.props.transaction}
           />,
       bsSize: 'large',
       onHide: (dialog) => {

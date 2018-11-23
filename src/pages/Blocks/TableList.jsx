@@ -110,7 +110,6 @@ class TableList extends Component {
     this.dialog.show({
       body: <Transaction
             transactionsdata={data}
-            transactions = {this.props.transaction}
             getTransaction = {this.props.getTransaction}
           />,
       bsSize: 'medium',
