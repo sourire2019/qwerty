@@ -1062,7 +1062,6 @@ export default {
 // }
 
 // const uploadContract = (channel, id, value) => dispatch => {
-//     console.log(12345, value)
 //     return axios.post(`/api/uploadContract`)
 //     .then(resp => {
 //         dispatch(actions.getUploadContract(resp.data))

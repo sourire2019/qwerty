@@ -97,8 +97,8 @@ class TableList extends Component {
     this.setState({currentPage : currentPage})
     this.fetchData(currentPage)
   }
-  addContract = (id) => {
-
+  addContract = (record, index) => {
+    let id =this.state.contractList[index].id
     this.dialog.show({
       title : <FormattedMessage
                 id='page.localeProvider.upload'
@@ -118,7 +118,8 @@ class TableList extends Component {
     })
   }
 
-  seeContract = async(id) => {
+  seeContract = async(record, index) => {
+    let id =this.state.contractList[index].id
     await this.props.getwatchContract(cookie.load("changechain"), id)
 
     this.dialog.show({
@@ -287,24 +288,27 @@ class TableList extends Component {
               defaultMessage='Operation'
               description='Operation'
             />}
-            dataIndex = "id"
-              cell= {row => (<span>
-                  <span onClick ={() => this.addContract(row)}>
-                  <FormattedMessage
-                    id='page.localeProvider.upload'
-                    defaultMessage='Upload'
-                    description='Upload'
-                  /></span>/
-                  <span onClick ={() => this.seeContract(row)}>
-                  <FormattedMessage
-                    id='page.localeProvider.see'
-                    defaultMessage='See'
-                    description='See'
-                  />
+            dataIndex = "srecode"
+              cell= { (row, index) =>(
+                <span>
+                  {row == null ? (
+                  <span onClick ={this.addContract.bind(this,row, index)}>
+                    <FormattedMessage
+                      id='page.localeProvider.upload'
+                      defaultMessage='Upload'
+                      description='Upload'
+                    />
+                  </span>) : (
+                  <span onClick ={this.seeContract.bind(this,row, index)}>
+                    <FormattedMessage
+                      id='page.localeProvider.see'
+                      defaultMessage='See'
+                      description='See'
+                    />
+                  </span>)}
                 </span>
-                  
+            )}
 
-              </span>)}
               width={200} />
           );break
 

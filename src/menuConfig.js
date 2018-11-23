@@ -17,7 +17,7 @@ const asideMenuConfig = [
   },
   {
     path: '/transactions',
-    name: 'transactions',
+    name: 'Transactions',
     icon: 'pe-7s-wallet',
   },
   {
