@@ -20,5 +20,9 @@ export default {
   'page.localeProvider.time': 'Time',
   'page.localeProvider.transactionsl': 'Transactions',
   'page.localeProvider.details': 'Details',
-  'page.localeProvider.chainname': 'Chain Name'
+  'page.localeProvider.chainname': 'Chain Name',
+  'page.localeProvider.blockid': 'blockid',
+  'page.localeProvider.blocktime': 'blockTime',
+  'page.localeProvider.from': 'From',
+  'page.localeProvider.to': 'To',
 }

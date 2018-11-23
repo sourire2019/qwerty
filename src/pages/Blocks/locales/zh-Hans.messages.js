@@ -20,5 +20,9 @@ export default {
   'page.localeProvider.time': '时间',
   'page.localeProvider.transactionsl': '交易',
   'page.localeProvider.details': '显示详情',
-  'page.localeProvider.chainname': '链名称'
+  'page.localeProvider.chainname': '链名称',
+  'page.localeProvider.blockid': '块高',
+  'page.localeProvider.blocktime': '块龄',
+  'page.localeProvider.from': '发送方',
+  'page.localeProvider.to': '接收方'
 }

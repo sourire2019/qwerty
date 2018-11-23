@@ -5,6 +5,12 @@ import {Table} from '@icedesign/base';
 import './main.css';
 import TransactionDetail from './TransactionDetail';
 import cookie from 'react-cookies';
+import compose from "recompose/compose";
+import {connect} from "react-redux";
+import {tableOperations, tableSelectors} from "state/redux/tables/";
+
+const {transaction} = tableOperations;
+const {transactionSelector} = tableSelectors
 
 class Transaction extends Component {
   constructor(props) {
@@ -19,8 +25,8 @@ class Transaction extends Component {
   }
   componentDidMount() {
     const selection = {};
-    if (this.props.transaction.length >0) {
-      this.props.transaction.forEach(element => {
+    if (this.props.transactionsdata.length >0) {
+      this.props.transactionsdata.forEach(element => {
         selection[element.blocknum] = false;
       });      
     }
@@ -74,7 +80,7 @@ class Transaction extends Component {
     return (
       <div>
         <Table
-          dataSource={this.props.transaction}
+          dataSource={this.props.transactionsdata}
           isLoading={false}
           className="basic-table"
           hasBorder={false}
@@ -87,4 +93,13 @@ class Transaction extends Component {
   }
 }
 
-export default Transaction;
+export default compose(
+  connect(
+    state => ({
+      transaction: transactionSelector(state)
+    }),
+    {
+      getTransaction : transaction
+    }
+  )
+)(Transaction);
